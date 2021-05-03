@@ -2,13 +2,13 @@
 
 from unittest import TestCase
 
-from cdsr_pack.decode import CDSRDecodeException, decode_asset_path
+from cdsr_pack.decode import CDSRDecodeException, decode_path
 
 
 class TestCDSRPackDecodeAMAZONIA1(TestCase):
     """TestCDSRPackDecodeAMAZONIA1"""
 
-    def test__decode_asset_path__amazonia1__valid_assets(self):
+    def test__decode_path__amazonia1__valid_assets(self):
         """Tests valid AMAZONIA1 assets."""
 
         test_cases = [
@@ -25,16 +25,16 @@ class TestCDSRPackDecodeAMAZONIA1(TestCase):
         }
 
         for test_case in test_cases:
-            self.assertEqual(expected, decode_asset_path(test_case))
+            self.assertEqual(expected, decode_path(test_case))
 
-    def test__decode_asset_path__amazonia1__invalid_assets(self):
+    def test__decode_path__amazonia1__invalid_assets(self):
         """Tests invalid AMAZONIA1 assets."""
 
         asset_path = ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11/'
                       '217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015.png')
 
         with self.assertRaises(CDSRDecodeException) as error:
-            decode_asset_path(asset_path)
+            decode_path(asset_path)
 
         self.assertEqual('Just TIFF and XML files can be decoded.', str(error.exception))
 
@@ -42,7 +42,7 @@ class TestCDSRPackDecodeAMAZONIA1(TestCase):
 class TestCDSRPackDecodeCBERS2B(TestCase):
     """TestCDSRPackDecodeCBERS2B"""
 
-    def test__decode_asset_path__cbers2b__valid_assets(self):
+    def test__decode_path__cbers2b__valid_assets(self):
         """Tests valid CBERS2B assets."""
 
         test_cases = [
@@ -121,9 +121,9 @@ class TestCDSRPackDecodeCBERS2B(TestCase):
         ]
 
         for test_case in test_cases:
-            self.assertEqual(test_case['expected'], decode_asset_path(test_case['asset_path']))
+            self.assertEqual(test_case['expected'], decode_path(test_case['asset_path']))
 
-    def test__decode_asset_path__cbers2b__invalid_assets(self):
+    def test__decode_path__cbers2b__invalid_assets(self):
         """Tests invalid CBERS2B assets."""
 
         test_cases = [
@@ -139,6 +139,153 @@ class TestCDSRPackDecodeCBERS2B(TestCase):
 
         for test_case in test_cases:
             with self.assertRaises(CDSRDecodeException) as error:
-                decode_asset_path(test_case)
+                decode_path(test_case)
+
+            self.assertEqual('Just TIFF and XML files can be decoded.', str(error.exception))
+
+
+class TestCDSRPackDecodeCBERS4(TestCase):
+    """TestCDSRPackDecodeCBERS4"""
+
+    def test__decode_path__cbers4__valid_assets(self):
+        """Tests valid CBERS4 assets."""
+
+        test_cases = [
+            {
+                'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/'
+                            '154_117_0/4_BC_UTM_WGS84/CBERS_4_AWFI_20210201_154_117_L4_BAND13.tif',
+                'expected': {
+                    'satellite': 'CBERS4', 'sensor': 'AWFI',
+                    'path': '154', 'row': '117',
+                    'geo_processing': '4', 'radio_processing': 'DN'
+                }
+            },
+            {
+                'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/'
+                            '154_117_0/4_BC_UTM_WGS84/CBERS_4_AWFI_20210201_154_117_L4_BAND13.xml',
+                'expected': {
+                    'satellite': 'CBERS4', 'sensor': 'AWFI',
+                    'path': '154', 'row': '117',
+                    'geo_processing': '4', 'radio_processing': 'DN'
+                }
+            },
+            {
+                'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/'
+                    '154_117_0/4_BC_UTM_WGS84/CBERS_4_AWFI_20210201_154_117_L4_CMASK_GRID_SURFACE.tif',
+                'expected': {
+                    'satellite': 'CBERS4', 'sensor': 'AWFI',
+                    'path': '154', 'row': '117',
+                    'geo_processing': '4', 'radio_processing': 'SR'
+                }
+            },
+            {
+                'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/'
+                    '154_117_0/4_BC_UTM_WGS84/CBERS_4_AWFI_20210201_154_117_L4_BAND13_GRID_SURFACE.xml',
+                'expected': {
+                    'satellite': 'CBERS4', 'sensor': 'AWFI',
+                    'path': '154', 'row': '117',
+                    'geo_processing': '4', 'radio_processing': 'SR'
+                }
+            },
+            {
+                'asset_path': '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/'
+                            '155_103_0/4_BC_UTM_WGS84/CBERS_4_MUX_20200731_155_103_L4_EVI.tif',
+                'expected': {
+                    'satellite': 'CBERS4', 'sensor': 'MUX',
+                    'path': '155', 'row': '103',
+                    'geo_processing': '4', 'radio_processing': 'SR'
+                }
+            },
+            {
+                'asset_path': '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/'
+                            '155_103_0/4_BC_UTM_WGS84/CBERS_4_MUX_20200731_155_103_L4_NDVI.tif',
+                'expected': {
+                    'satellite': 'CBERS4', 'sensor': 'MUX',
+                    'path': '155', 'row': '103',
+                    'geo_processing': '4', 'radio_processing': 'SR'
+                }
+            },
+            {
+                'asset_path': '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/'
+                    '155_103_0/4_BC_UTM_WGS84/CBERS_4_MUX_20200731_155_103_L4_BAND5_GRID_SURFACE.tif',
+                'expected': {
+                    'satellite': 'CBERS4', 'sensor': 'MUX',
+                    'path': '155', 'row': '103',
+                    'geo_processing': '4', 'radio_processing': 'SR'
+                }
+            },
+            {
+                'asset_path': '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/'
+                    '155_103_0/4_BC_UTM_WGS84/CBERS_4_MUX_20200731_155_103_L4_BAND5_GRID_SURFACE.xml',
+                'expected': {
+                    'satellite': 'CBERS4', 'sensor': 'MUX',
+                    'path': '155', 'row': '103',
+                    'geo_processing': '4', 'radio_processing': 'SR'
+                }
+            },
+            {
+                'asset_path': '/TIFF/CBERS4/2018_01/CBERS_4_MUX_DRD_2018_01_01.13_14_00_CB11/'
+                        '156_103_0/4_BC_UTM_WGS84/CBERS_4_MUX_20180101_156_103_L4_BAND5.tif',
+                'expected': {
+                    'satellite': 'CBERS4', 'sensor': 'MUX',
+                    'path': '156', 'row': '103',
+                    'geo_processing': '4', 'radio_processing': 'DN'
+                }
+            },
+            {
+                'asset_path': '/TIFF/CBERS4/2018_01/CBERS_4_MUX_DRD_2018_01_01.13_14_00_CB11/'
+                        '156_103_0/4_BC_UTM_WGS84/CBERS_4_MUX_20180101_156_103_L4_BAND6.xml',
+                'expected': {
+                    'satellite': 'CBERS4', 'sensor': 'MUX',
+                    'path': '156', 'row': '103',
+                    'geo_processing': '4', 'radio_processing': 'DN'
+                }
+            },
+            {
+                'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_PAN10M_DRD_2021_02_02.01_32_45_CB11/'
+                        '073_113_0/2_BC_UTM_WGS84/CBERS_4_PAN10M_20210201_073_113_L2_BAND2.tif',
+                'expected': {
+                    'satellite': 'CBERS4', 'sensor': 'PAN10M',
+                    'path': '073', 'row': '113',
+                    'geo_processing': '2', 'radio_processing': 'DN'
+                }
+            },
+            {
+                'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_PAN10M_DRD_2021_02_02.01_32_45_CB11/'
+                        '073_113_0/2_BC_UTM_WGS84/CBERS_4_PAN10M_20210201_073_113_L2_BAND2.xml',
+                'expected': {
+                    'satellite': 'CBERS4', 'sensor': 'PAN10M',
+                    'path': '073', 'row': '113',
+                    'geo_processing': '2', 'radio_processing': 'DN'
+                }
+            }
+        ]
+
+        for test_case in test_cases:
+            self.assertEqual(test_case['expected'], decode_path(test_case['asset_path']))
+
+    def test__decode_path__cbers4__invalid_assets(self):
+        """Tests invalid CBERS4 assets."""
+
+        test_cases = [
+            '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/154_117_0/'
+                '4_BC_UTM_WGS84/CBERS_4_AWFI_20210201_154_117.png',
+            '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/154_117_0/'
+                '4_BC_UTM_WGS84/CBERS_4_AWFI_20210201_154_117.png',
+            '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/154_117_0/'
+                '4_BC_UTM_WGS84/CBERS_4_AWFI_20210201_154_117_L4_CMASK_GRID_SURFACE.json',
+            '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/155_103_0/'
+                '4_BC_UTM_WGS84/CBERS_4_MUX_20200731_155_103.png',
+            '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/155_103_0/'
+                '4_BC_UTM_WGS84/CBERS_4_MUX_20200731_155_103_L4_CMASK_GRID_SURFACE.json',
+            '/TIFF/CBERS4/2018_01/CBERS_4_MUX_DRD_2018_01_01.13_14_00_CB11/156_103_0/'
+                '4_BC_UTM_WGS84/CBERS_4_MUX_20180101_156_103.png',
+            '/TIFF/CBERS4/2021_02/CBERS_4_PAN10M_DRD_2021_02_02.01_32_45_CB11/073_113_0/'
+                '2_BC_UTM_WGS84/CBERS_4_PAN10M_20210201_073_113.png'
+        ]
+
+        for test_case in test_cases:
+            with self.assertRaises(CDSRDecodeException) as error:
+                decode_path(test_case)
 
             self.assertEqual('Just TIFF and XML files can be decoded.', str(error.exception))
