@@ -84,43 +84,46 @@ def decode_geo_processing_dir(geo_processing_dir):
 
 
 def decode_asset(asset):
-    if 'GRID_SURFACE' in asset:
+    if not asset.endswith('.tif') and not asset.endswith('.xml'):
+        raise CDSRDecodeException('Just TIFF and XML files can be decoded.')
+
+    if 'GRID_SURFACE' in asset or 'EVI' in asset or 'NDVI' in asset:
         return 'SR'
 
     return 'DN'
 
 
-def decode_asset_path(asset_path):
-
-    if not asset_path.lower().endswith('.tif') and \
-            not asset_path.lower().endswith('.xml'):
-        raise CDSRDecodeException('Just TIFF and XML files can be decoded.')
+def decode_path(path):
 
     # get dir path starting at `/TIFF`
-    index = asset_path.find('TIFF')
+    index = path.find('TIFF')
     # `splitted_dir_path` example:
     # ['TIFF', 'CBERS4A', '2020_11', 'CBERS_4A_WFI_RAW_2020_11_10.13_41_00_ETC2',
     #  '207_148_0', '2_BC_UTM_WGS84', 'AMAZONIA_1_WFI_20210321_037_016_L2_BAND4.tif']
-    splitted_path = asset_path[index:].split(os_path_sep)
+    splitted_path = path[index:].split(os_path_sep)
 
-    # if I'm not inside a geo processing dir, then ignore this folder
-    if len(splitted_path) != 7:
-        raise CDSRDecodeException(f'Invalid `{len(splitted_path)}` dir_level '
-                                  f'to asset: `{asset_path}`.')
+    level = len(splitted_path)
+
+    # if this path is not level 6 or 7, then raise an exception
+    if level not in (6, 7):
+        raise CDSRDecodeException(f'Invalid `{level}` level to path: `{path}`.')
 
     # add the metadata based on the directory decode
     metadata = {}
 
+    # if path is 7 level, then the last position is the file
+    if level == 7:
+        metadata['radio_processing'] = decode_asset(splitted_path[-1])
+
     # extract `satellite` and `sensor` data from path
-    _, metadata['satellite'], _, scene_dir, path_row_dir, geo_processing_dir, asset = splitted_path
+    _, metadata['satellite'], _, scene_dir, path_row_dir, geo_processing_dir, *_ = splitted_path
 
     try:
         _, metadata['sensor'], *_ = decode_scene_dir(scene_dir)
         metadata['path'], metadata['row'] = decode_path_row_dir(path_row_dir)
         metadata['geo_processing'] = decode_geo_processing_dir(geo_processing_dir)
-        metadata['radio_processing'] = decode_asset(asset)
     except CDSRDecodeException as error:
-        raise CDSRDecodeException(f'Unable to decode asset: `{asset_path}`.') from error
+        raise CDSRDecodeException(f'Unable to decode path: `{path}`.') from error
 
     return metadata
 
