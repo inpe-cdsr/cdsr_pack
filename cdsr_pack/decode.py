@@ -1,13 +1,14 @@
+"""decode.py"""
 
 from os.path import sep as os_path_sep
 
 
 class CDSRDecodeException(Exception):
-    pass
+    """CDSRDecodeException"""
 
 
 def decode_scene_dir(scene_dir):
-    '''Decode a scene directory, returning its information.'''
+    """Decodes a scene directory, returning its information."""
 
     scene_dir_first, scene_dir_second = scene_dir.split('.')
 
@@ -30,7 +31,7 @@ def decode_scene_dir(scene_dir):
             # `time` can be: `13_53_00`, `13_53_00_ETC2`, `14_35_23_CB11_SIR18`, etc.
             time = ':'.join(time[0:3])
         else:
-            raise CDSRDecodeException()
+            raise CDSRDecodeException(f'Invalid spplited time: `{time}`.')
 
     elif scene_dir_first.startswith('CBERS2B') or scene_dir_first.startswith('LANDSAT'):
         # examples: CBERS2B_CCD_20070925.145654
@@ -40,7 +41,7 @@ def decode_scene_dir(scene_dir):
         time = scene_dir_second
 
         if len(date) != 8:
-            # example: a time should be something like this: '20070925'
+            # example: a date should be something like this: '20070925'
             raise CDSRDecodeException(f'Size of `{date}` date is not 8.')
 
         # I build the date string based on the old one (e.g. from '20070925' to '2007-09-25')
@@ -60,6 +61,8 @@ def decode_scene_dir(scene_dir):
 
 
 def decode_path_row_dir(path_row_dir):
+    """Decodes a path/row directory, returning its information."""
+
     splitted_path_row = path_row_dir.split('_')
 
     if len(splitted_path_row) == 3:
@@ -75,15 +78,20 @@ def decode_path_row_dir(path_row_dir):
 
 
 def decode_geo_processing_dir(geo_processing_dir):
+    """Decodes a geo. processing directory, returning its information."""
+
     geo_processing = geo_processing_dir.split('_')[0]
 
     if geo_processing in ('2', '2B', '3', '4'):
         return geo_processing
 
-    raise CDSRDecodeException(f'Geo. processing directory cannot be decoded: `{geo_processing_dir}`.')
+    raise CDSRDecodeException('Geo. processing directory cannot be '
+                              f'decoded: `{geo_processing_dir}`.')
 
 
 def decode_asset(asset):
+    """Decodes a asset file, returning if this file is DN or SR."""
+
     if not asset.endswith('.tif') and not asset.endswith('.xml'):
         raise CDSRDecodeException('Just TIFF and XML files can be decoded.')
 
@@ -94,14 +102,19 @@ def decode_asset(asset):
 
 
 def decode_path(path):
+    """Decodes a path, returning its metadata."""
 
-    # get dir path starting at `/TIFF`
+    # get dir path index starting at `/TIFF`
     index = path.find('TIFF')
-    # `splitted_dir_path` example:
-    # ['TIFF', 'CBERS4A', '2020_11', 'CBERS_4A_WFI_RAW_2020_11_10.13_41_00_ETC2',
-    #  '207_148_0', '2_BC_UTM_WGS84', 'AMAZONIA_1_WFI_20210321_037_016_L2_BAND4.tif']
+
+    # `splitted_dir_path` examples:
+    # - ['TIFF', 'CBERS4A', '2020_11', 'CBERS_4A_WFI_RAW_2020_11_10.13_41_00_ETC2',
+    #       '207_148_0', '2_BC_UTM_WGS84']
+    # - ['TIFF', 'CBERS4A', '2020_11', 'CBERS_4A_WFI_RAW_2020_11_10.13_41_00_ETC2',
+    #       '207_148_0', '2_BC_UTM_WGS84', 'AMAZONIA_1_WFI_20210321_037_016_L2_BAND4.tif']
     splitted_path = path[index:].split(os_path_sep)
 
+    # get directory level
     level = len(splitted_path)
 
     # if this path is not level 6 or 7, then raise an exception
@@ -109,9 +122,11 @@ def decode_path(path):
         raise CDSRDecodeException(f'Invalid `{level}` level to path: `{path}`.')
 
     # add the metadata based on the directory decode
-    metadata = {}
+    metadata = {
+        'radio_processing': None  # default value
+    }
 
-    # if path is 7 level, then the last position is the file
+    # if path is 7 level, then the last position is the file and I can get radio. processing
     if level == 7:
         metadata['radio_processing'] = decode_asset(splitted_path[-1])
 
