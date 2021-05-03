@@ -581,3 +581,55 @@ class TestCDSRPackDecodeLANDSAT(TestCase):
                 decode_path(test_case)
 
             self.assertEqual('Just TIFF and XML files can be decoded.', str(error.exception))
+
+
+class TestCDSRPackDecodeErrors(TestCase):
+    """TestCDSRPackDecodeErrors"""
+
+    def test__decode_path__errors__invalid_assets(self):
+        """Tests invalid assets."""
+
+        test_cases = [
+            {
+                'asset_path': '/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57/'
+                            '217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif',
+                'expected': 'Invalid spplited time: `12_57`.'
+            },
+            {
+                'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_CCD_201001.130915/151_098_0/'
+                                '2_BC_UTM_WGS84/CBERS_2B_CCD2XS_20100301_151_098_L2_BAND1.tif',
+                'expected': 'Size of `201001` date is not 8.'
+            },
+            {
+                'asset_path': '/TIFF/LANDSAT1/1973_05/LANDSAT1_MSS_19730521.1200/237_059_0/'
+                            '2_BC_UTM_WGS84/LANDSAT_1_MSS_19730521_237_059_L2_BAND4.tif',
+                'expected': 'Size of `1200` time is not 6.'
+            },
+            {
+                'asset_path': '/TIFF/SENTINEL/2021_01/SENTINEL_X_MUX_RAW_2021_01_01.13_48_30_ETC2/'
+                        '209_110_0/2_BC_UTM_WGS84/SENTINEL_X_SL_20210101_209_110_L2_BAND5.tif',
+                'expected': 'Invalid scene directory: `SENTINEL_X_MUX_RAW_2021_01_01.13_48_30_ETC2`.'
+            },
+            {
+                'asset_path': '/TIFF/CBERS4A/2021_01/CBERS_4A_MUX_RAW_2021_01_01.13_48_30_ETC2/'
+                        '209_110_0_1/2_BC_UTM_WGS84/CBERS_4A_MUX_20210101_209_110_L2_BAND5.tif',
+                'expected': '`209_110_0_1` path/row directory cannot be decoded.'
+            },
+            {
+                'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_HRC_20100301.130915/151_A_142_1_0/'
+                                '8_BC_UTM_WGS84/CBERS_2B_HRC_20100301_151_A_142_1_L2_BAND1.tif',
+                'expected': '`8_BC_UTM_WGS84` geo. processing directory cannot be decoded.'
+            },
+            {
+                'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/'
+                            'CBERS_4_AWFI_20210201_154_117_L4_BAND13.tif',
+                'expected': 'Invalid `5` level to path: `/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_'
+                        '2021_02_01.13_07_00_CB11/CBERS_4_AWFI_20210201_154_117_L4_BAND13.tif`.'
+            },
+        ]
+
+        for test_case in test_cases:
+            with self.assertRaises(CDSRDecodeException) as error:
+                decode_path(test_case['asset_path'])
+
+            self.assertEqual(test_case['expected'], str(error.exception))
