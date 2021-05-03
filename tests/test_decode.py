@@ -466,3 +466,118 @@ class TestCDSRPackDecodeCBERS4A(TestCase):
                 decode_path(test_case)
 
             self.assertEqual('Just TIFF and XML files can be decoded.', str(error.exception))
+
+
+class TestCDSRPackDecodeLANDSAT(TestCase):
+    """TestCDSRPackDecodeLANDSAT"""
+
+    def test__decode_path__landsat__valid_assets(self):
+        """Tests valid LANDSAT assets."""
+
+        test_cases = [
+            {
+                'asset_path': '/TIFF/LANDSAT1/1973_05/LANDSAT1_MSS_19730521.120000/237_059_0/'
+                                '2_BC_UTM_WGS84/LANDSAT_1_MSS_19730521_237_059_L2_BAND4.tif',
+                'expected': {
+                    'satellite': 'LANDSAT1', 'sensor': 'MSS', 'path': '237', 'row': '059',
+                    'geo_processing': '2', 'radio_processing': 'DN'
+                }
+            },
+            {
+                'asset_path': '/TIFF/LANDSAT1/1973_05/LANDSAT1_MSS_19730521.120000/237_059_0/'
+                                '2_BC_UTM_WGS84/LANDSAT_1_MSS_19730521_237_059_L2_BAND4.xml',
+                'expected': {
+                    'satellite': 'LANDSAT1', 'sensor': 'MSS', 'path': '237', 'row': '059',
+                    'geo_processing': '2', 'radio_processing': 'DN'
+                }
+            },
+            {
+                'asset_path': '/TIFF/LANDSAT2/1982_02/LANDSAT2_MSS_19820201.120000/005_055_0/'
+                                '2_BC_UTM_WGS84/LANDSAT_2_MSS_19820201_005_055_L2_BAND4.tif',
+                'expected': {
+                    'satellite': 'LANDSAT2', 'sensor': 'MSS', 'path': '005', 'row': '055',
+                    'geo_processing': '2', 'radio_processing': 'DN'
+                }
+            },
+            {
+                'asset_path': '/TIFF/LANDSAT2/1982_02/LANDSAT2_MSS_19820201.120000/005_055_0/'
+                                '2_BC_UTM_WGS84/LANDSAT_2_MSS_19820201_005_055_L2_BAND4.xml',
+                'expected': {
+                    'satellite': 'LANDSAT2', 'sensor': 'MSS', 'path': '005', 'row': '055',
+                    'geo_processing': '2', 'radio_processing': 'DN'
+                }
+            },
+            {
+                'asset_path': '/TIFF/LANDSAT3/1978_04/LANDSAT3_MSS_19780405.120000/235_075_0/'
+                                '2_BC_UTM_WGS84/LANDSAT_3_MSS_19780405_235_075_L2_BAND4.tif',
+                'expected': {
+                    'satellite': 'LANDSAT3', 'sensor': 'MSS', 'path': '235', 'row': '075',
+                    'geo_processing': '2', 'radio_processing': 'DN'
+                }
+            },
+            {
+                'asset_path': '/TIFF/LANDSAT3/1978_04/LANDSAT3_MSS_19780405.120000/235_075_0/'
+                                '2_BC_UTM_WGS84/LANDSAT_3_MSS_19780405_235_075_L2_BAND4.xml',
+                'expected': {
+                    'satellite': 'LANDSAT3', 'sensor': 'MSS', 'path': '235', 'row': '075',
+                    'geo_processing': '2', 'radio_processing': 'DN'
+                }
+            },
+            {
+                'asset_path': '/TIFF/LANDSAT5/2011_11/LANDSAT5_TM_20111101.140950/233_054_0/'
+                                '2_BC_UTM_WGS84/LANDSAT_5_TM_20111101_233_054_L2_BAND1.tif',
+                'expected': {
+                    'satellite': 'LANDSAT5', 'sensor': 'TM', 'path': '233', 'row': '054',
+                    'geo_processing': '2', 'radio_processing': 'DN'
+                }
+            },
+            {
+                'asset_path': '/TIFF/LANDSAT5/2011_11/LANDSAT5_TM_20111101.140950/233_054_0/'
+                                '2_BC_UTM_WGS84/LANDSAT_5_TM_20111101_233_054_L2_BAND1.xml',
+                'expected': {
+                    'satellite': 'LANDSAT5', 'sensor': 'TM', 'path': '233', 'row': '054',
+                    'geo_processing': '2', 'radio_processing': 'DN'
+                }
+            },
+            {
+                'asset_path': '/TIFF/LANDSAT7/1999_07/LANDSAT7_ETM_19990731.144148/004_072_0/'
+                                '2_BC_UTM_WGS84/LANDSAT_7_ETMXS_19990731_004_072_L2_BAND1.tif',
+                'expected': {
+                    'satellite': 'LANDSAT7', 'sensor': 'ETM', 'path': '004', 'row': '072',
+                    'geo_processing': '2', 'radio_processing': 'DN'
+                }
+            },
+            {
+                'asset_path': '/TIFF/LANDSAT7/1999_07/LANDSAT7_ETM_19990731.144148/004_072_0/'
+                                '2_BC_UTM_WGS84/LANDSAT_7_ETMXS_19990731_004_072_L2_BAND1.xml',
+                'expected': {
+                    'satellite': 'LANDSAT7', 'sensor': 'ETM', 'path': '004', 'row': '072',
+                    'geo_processing': '2', 'radio_processing': 'DN'
+                }
+            }
+        ]
+
+        for test_case in test_cases:
+            self.assertEqual(test_case['expected'], decode_path(test_case['asset_path']))
+
+    def test__decode_path__landsat__invalid_assets(self):
+        """Tests invalid LANDSAT assets."""
+
+        test_cases = [
+            '/TIFF/LANDSAT1/1973_05/LANDSAT1_MSS_19730521.120000/237_059_0/'
+                '2_BC_UTM_WGS84/LANDSAT_1_MSS_19730521_237_059.png',
+            '/TIFF/LANDSAT2/1982_02/LANDSAT2_MSS_19820201.120000/005_055_0/'
+                '2_BC_UTM_WGS84/LANDSAT_2_MSS_19820201_005_055.png',
+            '/TIFF/LANDSAT3/1978_04/LANDSAT3_MSS_19780405.120000/235_075_0/'
+                '2_BC_UTM_WGS84/LANDSAT_3_MSS_19780405_235_075.png',
+            '/TIFF/LANDSAT5/2011_11/LANDSAT5_TM_20111101.140950/233_054_0/'
+                '2_BC_UTM_WGS84/LANDSAT_5_TM_20111101_233_054.png',
+            '/TIFF/LANDSAT7/1999_07/LANDSAT7_ETM_19990731.144148/004_072_0/'
+                '2_BC_UTM_WGS84/LANDSAT_7_ETMXS_19990731_004_072.png'
+        ]
+
+        for test_case in test_cases:
+            with self.assertRaises(CDSRDecodeException) as error:
+                decode_path(test_case)
+
+            self.assertEqual('Just TIFF and XML files can be decoded.', str(error.exception))
