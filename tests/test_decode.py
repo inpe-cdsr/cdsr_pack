@@ -2,7 +2,7 @@
 
 from unittest import TestCase
 
-from cdsr_pack.decode import CDSRDecodeException, decode_path
+from cdsr_pack.decoder import CDSRDecodeException, decode_path
 
 
 class TestCDSRPackDecodeAMAZONIA1(TestCase):
