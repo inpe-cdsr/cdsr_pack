@@ -1,9 +1,9 @@
-"""test_decode.py test module."""
+"""test_cdsr_pack.py test module."""
 
 from unittest import TestCase
 
-from cdsr_pack.decoder import CDSRDecoderException, decode_path
-from cdsr_pack.builder import CDSRBuilderException, build_collection
+from src.cdsr_pack import CDSRBuilderException, CDSRDecoderException, \
+                          build_collection, decode_path
 
 
 class TestCDSRPackAMAZONIA1(TestCase):
