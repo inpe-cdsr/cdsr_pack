@@ -6,7 +6,7 @@ CDSR pack is a package to store common functions from CDSR project.
 ## Installation
 
 ```
-$ pip install cdsr-pack==0.0.dev1
+$ pip install cdsr-pack==0.0.dev2
 ```
 
 ## Usage
