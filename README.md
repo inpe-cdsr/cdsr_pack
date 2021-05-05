@@ -6,13 +6,16 @@ CDSR pack is a package to store common functions from CDSR project.
 ## Installation
 
 ```
-$ pip install cdsr-pack==0.0.dev2
+$ pip install cdsr-pack==<version>
 ```
+
+Look at [here](https://pypi.org/project/cdsr-pack/#history) to see the available versions.
+
 
 ## Usage
 
 ```
->>> from cdsr_pack import build_collection, decode_path
+>>> from cdsr_pack import build_collection, build_item, decode_path
 
 >>> image = ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11/'
              '217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif')
@@ -21,13 +24,15 @@ $ pip install cdsr-pack==0.0.dev2
 
 >>> decoded_image
 {
-    'satellite': 'AMAZONIA1', 'sensor': 'WFI',
-    'path': '217', 'row': '015',
-    'geo_processing': '2', 'radio_processing': 'DN'
+    'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '217', 'row': '015',
+    'date': '2021-03-03', 'geo_processing': '2', 'radio_processing': 'DN'
 }
 
 >>> build_collection(decoded_image)
 'AMAZONIA1_WFI_L2_DN'
+
+>>> build_item(decoded_image)
+'AMAZONIA1_WFI_217015_20210303_L2_DN'
 ```
 
 ## Development
