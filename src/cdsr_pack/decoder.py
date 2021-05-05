@@ -113,8 +113,16 @@ def decode_asset(asset):
     return date, 'DN'
 
 
-def decode_path(path):
+def decode_path(path: str) -> dict:
     """Decodes a path, returning its metadata."""
+
+    # check type
+    if not isinstance(path, str):
+        raise CDSRDecoderException(f'Path must be a str, not a `{type(path)}`.')
+
+    # if path ends with slash, then remove it
+    if path.endswith('/'):
+        path = path[:-1]
 
     # get dir path index starting at `/TIFF`
     index = path.find('TIFF')
