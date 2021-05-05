@@ -30,6 +30,41 @@ class TestCDSRPackAMAZONIA1(TestCase):
         self.assertEqual('AMAZONIA1_WFI_L2_DN', build_collection(expected_metadata))
         self.assertEqual('AMAZONIA1_WFI_217015_20210303_L2_DN', build_item(expected_metadata))
 
+    def test__amazonia1__valid_paths(self):
+        """Tests valid AMAZONIA1 paths."""
+
+        test_cases = [
+            '/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11/'
+                '217_015_0/2_BC_LCC_WGS84',
+            '/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11/'
+                '217_015_0/2_BC_LCC_WGS84/'
+        ]
+
+        expected_metadata = {
+            'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '217', 'row': '015',
+            'date': None, 'geo_processing': '2', 'radio_processing': None
+        }
+
+        # check decode_path function
+        for test_case in test_cases:
+            self.assertEqual(expected_metadata, decode_path(test_case))
+
+        # check build_collection function
+        with self.assertRaises(CDSRBuilderException) as error:
+            build_collection(expected_metadata)
+
+        self.assertEqual('All values inside metadata dict must be strings, '
+                        'but the following keys are not: `radio_processing`.',
+                        str(error.exception))
+
+        # check build_item function
+        with self.assertRaises(CDSRBuilderException) as error:
+            build_item(expected_metadata)
+
+        self.assertEqual('All values inside metadata dict must be strings, '
+                        'but the following keys are not: `date, radio_processing`.',
+                        str(error.exception))
+
     def test__amazonia1__invalid_assets(self):
         """Tests invalid AMAZONIA1 assets."""
 
@@ -141,6 +176,64 @@ class TestCDSRPackCBERS2B(TestCase):
             # check if build_item function works
             self.assertEqual(test_case['expected_item'],
                              build_item(test_case['expected_metadata']))
+
+    def test__cbers2b__valid_paths(self):
+        """Tests valid CBERS2B paths."""
+
+        test_cases = [
+            {
+                'path': '/TIFF/CBERS2B/2010_03/CBERS2B_CCD_20100301.130915/151_098_0/'
+                        '2_BC_UTM_WGS84',
+                'expected_metadata': {
+                    'satellite': 'CBERS2B', 'sensor': 'CCD', 'path': '151', 'row': '098',
+                    'date': None, 'geo_processing': '2', 'radio_processing': None
+                }
+            },
+            {
+                'path': '/TIFF/CBERS2B/2010_03/CBERS2B_HRC_20100301.130915/151_B_141_5_0/'
+                        '2_BC_UTM_WGS84/',
+                'expected_metadata': {
+                    'satellite': 'CBERS2B', 'sensor': 'HRC', 'path': '151', 'row': '141',
+                    'date': None, 'geo_processing': '2', 'radio_processing': None
+                }
+            },
+            {
+                'path': '/TIFF/CBERS2B/2010_03/CBERS2B_HRC_20100301.130915/151_A_142_1_0/'
+                        '2_BC_UTM_WGS84',
+                'expected_metadata': {
+                    'satellite': 'CBERS2B', 'sensor': 'HRC', 'path': '151', 'row': '142',
+                    'date': None, 'geo_processing': '2', 'radio_processing': None
+                }
+            },
+            {
+                'path': '/TIFF/CBERS2B/2010_03/CBERS2B_WFI_20100301.144734/177_092_0/'
+                        '2_BC_LCC_WGS84/',
+                'expected_metadata': {
+                    'satellite': 'CBERS2B', 'sensor': 'WFI', 'path': '177', 'row': '092',
+                    'date': None, 'geo_processing': '2', 'radio_processing': None
+                }
+            }
+        ]
+
+        # check decode_path function
+        for test_case in test_cases:
+            self.assertEqual(test_case['expected_metadata'], decode_path(test_case['path']))
+
+            # check build_collection function
+            with self.assertRaises(CDSRBuilderException) as error:
+                build_collection(test_case['expected_metadata'])
+
+            self.assertEqual('All values inside metadata dict must be strings, '
+                            'but the following keys are not: `radio_processing`.',
+                            str(error.exception))
+
+            # check build_item function
+            with self.assertRaises(CDSRBuilderException) as error:
+                build_item(test_case['expected_metadata'])
+
+            self.assertEqual('All values inside metadata dict must be strings, '
+                            'but the following keys are not: `date, radio_processing`.',
+                            str(error.exception))
 
     def test__cbers2b__invalid_assets(self):
         """Tests invalid CBERS2B assets."""
@@ -302,6 +395,9 @@ class TestCDSRPackCBERS4(TestCase):
             # check if build_item function works
             self.assertEqual(test_case['expected_item'],
                              build_item(test_case['expected_metadata']))
+
+    # def test__cbers4__valid_paths(self):
+    #     TODO: """Tests valid CBERS4 paths."""
 
     def test__cbers4__invalid_assets(self):
         """Tests invalid CBERS4 assets."""
@@ -520,6 +616,9 @@ class TestCDSRPackCBERS4A(TestCase):
             self.assertEqual(test_case['expected_item'],
                              build_item(test_case['expected_metadata']))
 
+    # def test__cbers4a__valid_paths(self):
+    #     TODO """Tests valid CBERS4A paths."""
+
     def test__cbers4a__invalid_assets(self):
         """Tests invalid CBERS4A assets."""
 
@@ -669,6 +768,9 @@ class TestCDSRPackLANDSAT(TestCase):
             self.assertEqual(test_case['expected_item'],
                              build_item(test_case['expected_metadata']))
 
+    # def test__landsat__valid_paths(self):
+    #     TODO """Tests valid LANDSAT paths."""
+
     def test__landsat__invalid_assets(self):
         """Tests invalid LANDSAT assets."""
 
@@ -692,6 +794,51 @@ class TestCDSRPackLANDSAT(TestCase):
             self.assertEqual('Just TIFF and XML files can be decoded.', str(error.exception))
 
 
+class TestCDSRPackOtherBehaviors(TestCase):
+    """TestCDSRPackOtherBehaviors"""
+
+    def test__other_behaviors(self):
+        """Tests other expected behaviors."""
+
+        test_cases = [
+            {
+                'metadata': {
+                    'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '217', 'row': '015',
+                    'date': None, 'geo_processing': '2', 'radio_processing': 'DN'
+                },
+                'expected_collection': 'AMAZONIA1_WFI_L2_DN',
+                'expected_build_item_error': 'All values inside metadata dict must be strings, '
+                                             'but the following keys are not: `date`.'
+            },
+            {
+                'metadata': {
+                    'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '217', 'row': '015',
+                    'date': '2021-03-03', 'geo_processing': '2', 'radio_processing': None
+                },
+                'expected_build_collection_error': 'All values inside metadata dict must be '
+                                    'strings, but the following keys are not: `radio_processing`.',
+                'expected_build_item_error': 'All values inside metadata dict must be strings, '
+                                    'but the following keys are not: `radio_processing`.'
+            }
+        ]
+
+        for test_case in test_cases:
+            if 'expected_collection' in test_case:
+                self.assertEqual(test_case['expected_collection'],
+                                 build_collection(test_case['metadata']))
+
+            if 'expected_build_collection_error' in test_case:
+                with self.assertRaises(CDSRBuilderException) as error:
+                    build_collection(test_case['metadata'])
+
+                self.assertEqual(test_case['expected_build_collection_error'], str(error.exception))
+
+            with self.assertRaises(CDSRBuilderException) as error:
+                build_item(test_case['metadata'])
+
+            self.assertEqual(test_case['expected_build_item_error'], str(error.exception))
+
+
 class TestCDSRPackErrors(TestCase):
     """TestCDSRPackDecodeErrors"""
 
@@ -700,18 +847,38 @@ class TestCDSRPackErrors(TestCase):
 
         test_cases = [
             {
+                'asset_path': '',
+                'expected': 'Invalid `1` level to path: ``.'
+            },
+            {
+                'asset_path': '/',
+                'expected': 'Invalid `1` level to path: ``.'
+            },
+            {
+                'asset_path': None,
+                'expected': "Path must be a str, not a `<class 'NoneType'>`."
+            },
+            {
+                'asset_path': 0,
+                'expected': "Path must be a str, not a `<class 'int'>`."
+            },
+            {
+                'asset_path': [],
+                'expected': "Path must be a str, not a `<class 'list'>`."
+            },
+            {
                 'asset_path': '/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57/'
-                            '217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif',
+                              '217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif',
                 'expected': 'Invalid spplited time: `12_57`.'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_CCD_201001.130915/151_098_0/'
-                                '2_BC_UTM_WGS84/CBERS_2B_CCD2XS_20100301_151_098_L2_BAND1.tif',
+                              '2_BC_UTM_WGS84/CBERS_2B_CCD2XS_20100301_151_098_L2_BAND1.tif',
                 'expected': 'Size of `201001` date is not 8.'
             },
             {
                 'asset_path': '/TIFF/LANDSAT1/1973_05/LANDSAT1_MSS_19730521.1200/237_059_0/'
-                            '2_BC_UTM_WGS84/LANDSAT_1_MSS_19730521_237_059_L2_BAND4.tif',
+                              '2_BC_UTM_WGS84/LANDSAT_1_MSS_19730521_237_059_L2_BAND4.tif',
                 'expected': 'Size of `1200` time is not 6.'
             },
             {
@@ -726,14 +893,19 @@ class TestCDSRPackErrors(TestCase):
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_HRC_20100301.130915/151_A_142_1_0/'
-                                '8_BC_UTM_WGS84/CBERS_2B_HRC_20100301_151_A_142_1_L2_BAND1.tif',
+                              '8_BC_UTM_WGS84/CBERS_2B_HRC_20100301_151_A_142_1_L2_BAND1.tif',
                 'expected': '`8_BC_UTM_WGS84` geo. processing directory cannot be decoded.'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/'
-                            'CBERS_4_AWFI_20210201_154_117_L4_BAND13.tif',
+                              'CBERS_4_AWFI_20210201_154_117_L4_BAND13.tif',
                 'expected': 'Invalid `5` level to path: `/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_'
                         '2021_02_01.13_07_00_CB11/CBERS_4_AWFI_20210201_154_117_L4_BAND13.tif`.'
+            },
+            {
+                'asset_path': '/TIFF/LANDSAT1/1973_05/LANDSAT1_MSS_19730521.120000/237_059_0/'
+                              '2_BC_UTM_WGS84/LANDSAT_1_MSS_1973521_237_059_L2_BAND4.tif',
+                'expected': 'Invalid date inside asset: `1973521`.'
             }
         ]
 
@@ -749,28 +921,45 @@ class TestCDSRPackErrors(TestCase):
         test_cases = [
             {
                 'metadata': '',
-                'expected': "Metadata must be a dict, not a `<class 'str'>`."
+                'expected_build_collection_error': "Metadata must be a dict, "
+                                                   "not a `<class 'str'>`.",
+                'expected_build_item_error': "Metadata must be a dict, not a "
+                                             "`<class 'str'>`."
             },
             {
                 'metadata': 0,
-                'expected': "Metadata must be a dict, not a `<class 'int'>`."
+                'expected_build_collection_error': "Metadata must be a dict, "
+                                                   "not a `<class 'int'>`.",
+                'expected_build_item_error': "Metadata must be a dict, not a "
+                                             "`<class 'int'>`."
             },
             {
                 'metadata': [],
-                'expected': "Metadata must be a dict, not a `<class 'list'>`."
+                'expected_build_collection_error': "Metadata must be a dict, "
+                                                   "not a `<class 'list'>`.",
+                'expected_build_item_error': "Metadata must be a dict, not a "
+                                             "`<class 'list'>`."
             },
             {
                 'metadata': {'sensor': 'WFI'},
-                'expected': 'Missing keys inside metadata: `satellite, geo_processing, '
-                            'radio_processing`.'
+                'expected_build_collection_error': 'Missing keys inside metadata: '
+                                        '`satellite, geo_processing, radio_processing`.',
+                'expected_build_item_error': 'Missing keys inside metadata: `satellite, '
+                                        'path, row, date, geo_processing, radio_processing`.'
             },
             {
                 'metadata': {'radio_processing': 'SR'},
-                'expected': 'Missing keys inside metadata: `satellite, sensor, geo_processing`.'
+                'expected_build_collection_error': 'Missing keys inside metadata: '
+                                                   '`satellite, sensor, geo_processing`.',
+                'expected_build_item_error': 'Missing keys inside metadata: `satellite, sensor, '
+                                             'path, row, date, geo_processing`.',
             },
             {
                 'metadata': {'satellite': 'AMAZONIA1', 'sensor': 'WFI'},
-                'expected': 'Missing keys inside metadata: `geo_processing, radio_processing`.'
+                'expected_build_collection_error': 'Missing keys inside metadata: '
+                                                   '`geo_processing, radio_processing`.',
+                'expected_build_item_error': 'Missing keys inside metadata: `path, row, date, '
+                                             'geo_processing, radio_processing`.'
             }
         ]
 
@@ -778,4 +967,9 @@ class TestCDSRPackErrors(TestCase):
             with self.assertRaises(CDSRBuilderException) as error:
                 build_collection(test_case['metadata'])
 
-            self.assertEqual(test_case['expected'], str(error.exception))
+            self.assertEqual(test_case['expected_build_collection_error'], str(error.exception))
+
+            with self.assertRaises(CDSRBuilderException) as error:
+                build_item(test_case['metadata'])
+
+            self.assertEqual(test_case['expected_build_item_error'], str(error.exception))
