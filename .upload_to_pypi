@@ -1,0 +1,14 @@
+# version
+
+https://packaging.python.org/specifications/core-metadata/#version
+
+
+# development
+
+rm -r build dist
+python3 -m build && python3 -m twine upload --repository testpypi dist/*
+
+
+# production
+
+python3 -m build && python3 -m twine upload dist/*
