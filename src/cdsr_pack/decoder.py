@@ -90,15 +90,27 @@ def decode_geo_processing_dir(geo_processing_dir):
 
 
 def decode_asset(asset):
-    """Decodes a asset file, returning if this file is DN or SR."""
+    """Decodes a asset file, returning if this file is DN or SR.
+    Asset example: `AMAZONIA_1_WFI_20210321_037_016_L2_BAND4.tif`"""
+
+    # asset example: AMAZONIA_1_WFI_20210321_037_016_L2_BAND4.tif
 
     if not asset.endswith('.tif') and not asset.endswith('.xml'):
         raise CDSRDecoderException('Just TIFF and XML files can be decoded.')
 
-    if 'GRID_SURFACE' in asset or 'EVI' in asset or 'NDVI' in asset:
-        return 'SR'
+    # get date from asset
+    date = asset.split('_')[3]
 
-    return 'DN'
+    if len(date) != 8:
+        raise CDSRDecoderException(f'Invalid date inside asset: `{date}`.')
+
+    # fix date format
+    date = f'{date[:4]}-{date[4:6]}-{date[6:8]}'
+
+    if 'GRID_SURFACE' in asset or 'EVI' in asset or 'NDVI' in asset:
+        return date, 'SR'
+
+    return date, 'DN'
 
 
 def decode_path(path):
@@ -123,12 +135,14 @@ def decode_path(path):
 
     # add the metadata based on the directory decode
     metadata = {
-        'radio_processing': None  # default value
+        # default values
+        'date': None,
+        'radio_processing': None
     }
 
     # if path is 7 level, then the last position is the file and I can get radio. processing
     if level == 7:
-        metadata['radio_processing'] = decode_asset(splitted_path[-1])
+        metadata['date'], metadata['radio_processing'] = decode_asset(splitted_path[-1])
 
     # extract metadata
     _, metadata['satellite'], _, scene_dir, path_row_dir, geo_processing_dir, *_ = splitted_path
