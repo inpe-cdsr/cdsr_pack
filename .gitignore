@@ -1,6 +1,15 @@
-
+# python
 __pycache__
 *.pyc
+
+# coverage
 htmlcov
 .coverage
+
+# build
+dist
+build
+*egg-info
+
+# other
 .vscode
