@@ -889,12 +889,12 @@ class TestCDSRPackErrors(TestCase):
             {
                 'asset_path': '/TIFF/CBERS4A/2021_01/CBERS_4A_MUX_RAW_2021_01_01.13_48_30_ETC2/'
                         '209_110_0_1/2_BC_UTM_WGS84/CBERS_4A_MUX_20210101_209_110_L2_BAND5.tif',
-                'expected': '`209_110_0_1` path/row directory cannot be decoded.'
+                'expected': 'Path/row directory cannot be decoded: `209_110_0_1`.'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_HRC_20100301.130915/151_A_142_1_0/'
                               '8_BC_UTM_WGS84/CBERS_2B_HRC_20100301_151_A_142_1_L2_BAND1.tif',
-                'expected': '`8_BC_UTM_WGS84` geo. processing directory cannot be decoded.'
+                'expected': 'Geo. processing directory cannot be decoded: `8_BC_UTM_WGS84`.'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/'
