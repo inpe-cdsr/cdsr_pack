@@ -72,7 +72,7 @@ def decode_path_row_dir(path_row_dir):
         # example: `151_B_141_5_0`
         path, _, row, *_ = splitted_path_row
     else:
-        raise CDSRDecoderException(f'`{path_row_dir}` path/row directory cannot be decoded.')
+        raise CDSRDecoderException(f'Path/row directory cannot be decoded: `{path_row_dir}`.')
 
     return path, row
 
@@ -85,8 +85,8 @@ def decode_geo_processing_dir(geo_processing_dir):
     if geo_processing in ('2', '2B', '3', '4'):
         return geo_processing
 
-    raise CDSRDecoderException(f'`{geo_processing_dir}` geo. processing '
-                                'directory cannot be decoded.')
+    raise CDSRDecoderException('Geo. processing directory cannot '
+                              f'be decoded: `{geo_processing_dir}`.')
 
 
 def decode_asset(asset):
