@@ -28,7 +28,7 @@ class TestCDSRPackAMAZONIA1(TestCase):
             self.assertEqual(expected_metadata, decode_path(test_case))
 
         self.assertEqual('AMAZONIA1_WFI_L2_DN', build_collection(expected_metadata))
-        self.assertEqual('AMAZONIA1_WFI_217015_20210303_L2_DN', build_item(expected_metadata))
+        self.assertEqual('AMAZONIA1_WFI_217015_20210303', build_item(expected_metadata))
 
     def test__amazonia1__valid_paths(self):
         """Tests valid AMAZONIA1 paths."""
@@ -53,7 +53,7 @@ class TestCDSRPackAMAZONIA1(TestCase):
         with self.assertRaises(CDSRBuilderException) as error:
             build_collection(expected_metadata)
 
-        self.assertEqual('All values inside metadata dict must be strings, '
+        self.assertEqual('All mandatory values inside metadata dict must be strings, '
                         'but the following keys are not: `radio_processing`.',
                         str(error.exception))
 
@@ -61,8 +61,8 @@ class TestCDSRPackAMAZONIA1(TestCase):
         with self.assertRaises(CDSRBuilderException) as error:
             build_item(expected_metadata)
 
-        self.assertEqual('All values inside metadata dict must be strings, '
-                        'but the following keys are not: `date, radio_processing`.',
+        self.assertEqual('All mandatory values inside metadata dict must be strings, '
+                        'but the following keys are not: `date`.',
                         str(error.exception))
 
     def test__amazonia1__invalid_assets(self):
@@ -92,7 +92,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'date': '2010-03-01', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS2B_CCD_L2_DN',
-                'expected_item': 'CBERS2B_CCD_151098_20100301_L2_DN'
+                'expected_item': 'CBERS2B_CCD_151098_20100301'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_CCD_20100301.130915/151_098_0/'
@@ -102,7 +102,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'date': '2010-03-01', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS2B_CCD_L2_DN',
-                'expected_item': 'CBERS2B_CCD_151098_20100301_L2_DN'
+                'expected_item': 'CBERS2B_CCD_151098_20100301'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_HRC_20100301.130915/151_B_141_5_0/'
@@ -112,7 +112,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'date': '2010-03-01', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS2B_HRC_L2_DN',
-                'expected_item': 'CBERS2B_HRC_151141_20100301_L2_DN'
+                'expected_item': 'CBERS2B_HRC_151141_20100301'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_HRC_20100301.130915/151_B_141_5_0/'
@@ -122,7 +122,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'date': '2010-03-01', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS2B_HRC_L2_DN',
-                'expected_item': 'CBERS2B_HRC_151141_20100301_L2_DN'
+                'expected_item': 'CBERS2B_HRC_151141_20100301'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_HRC_20100301.130915/151_A_142_1_0/'
@@ -132,7 +132,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'date': '2010-03-01', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS2B_HRC_L2_DN',
-                'expected_item': 'CBERS2B_HRC_151142_20100301_L2_DN'
+                'expected_item': 'CBERS2B_HRC_151142_20100301'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_HRC_20100301.130915/151_A_142_1_0/'
@@ -142,7 +142,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'date': '2010-03-01', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS2B_HRC_L2_DN',
-                'expected_item': 'CBERS2B_HRC_151142_20100301_L2_DN'
+                'expected_item': 'CBERS2B_HRC_151142_20100301'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_WFI_20100301.144734/177_092_0/'
@@ -152,7 +152,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'date': '2010-03-01', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS2B_WFI_L2_DN',
-                'expected_item': 'CBERS2B_WFI_177092_20100301_L2_DN'
+                'expected_item': 'CBERS2B_WFI_177092_20100301'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_WFI_20100301.144734/177_092_0/'
@@ -162,7 +162,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'date': '2010-03-01', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS2B_WFI_L2_DN',
-                'expected_item': 'CBERS2B_WFI_177092_20100301_L2_DN'
+                'expected_item': 'CBERS2B_WFI_177092_20100301'
             }
         ]
 
@@ -223,7 +223,7 @@ class TestCDSRPackCBERS2B(TestCase):
             with self.assertRaises(CDSRBuilderException) as error:
                 build_collection(test_case['expected_metadata'])
 
-            self.assertEqual('All values inside metadata dict must be strings, '
+            self.assertEqual('All mandatory values inside metadata dict must be strings, '
                             'but the following keys are not: `radio_processing`.',
                             str(error.exception))
 
@@ -231,8 +231,8 @@ class TestCDSRPackCBERS2B(TestCase):
             with self.assertRaises(CDSRBuilderException) as error:
                 build_item(test_case['expected_metadata'])
 
-            self.assertEqual('All values inside metadata dict must be strings, '
-                            'but the following keys are not: `date, radio_processing`.',
+            self.assertEqual('All mandatory values inside metadata dict must be strings, '
+                            'but the following keys are not: `date`.',
                             str(error.exception))
 
     def test__cbers2b__invalid_assets(self):
@@ -271,7 +271,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'date': '2021-02-01', 'geo_processing': '4', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4_AWFI_L4_DN',
-                'expected_item': 'CBERS4_AWFI_154117_20210201_L4_DN'
+                'expected_item': 'CBERS4_AWFI_154117_20210201'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/'
@@ -281,7 +281,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'date': '2021-02-01', 'geo_processing': '4', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4_AWFI_L4_DN',
-                'expected_item': 'CBERS4_AWFI_154117_20210201_L4_DN'
+                'expected_item': 'CBERS4_AWFI_154117_20210201'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/'
@@ -291,7 +291,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'date': '2021-02-01', 'geo_processing': '4', 'radio_processing': 'SR'
                 },
                 'expected_collection': 'CBERS4_AWFI_L4_SR',
-                'expected_item': 'CBERS4_AWFI_154117_20210201_L4_SR'
+                'expected_item': 'CBERS4_AWFI_154117_20210201'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/'
@@ -301,7 +301,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'date': '2021-02-01', 'geo_processing': '4', 'radio_processing': 'SR'
                 },
                 'expected_collection': 'CBERS4_AWFI_L4_SR',
-                'expected_item': 'CBERS4_AWFI_154117_20210201_L4_SR'
+                'expected_item': 'CBERS4_AWFI_154117_20210201'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/'
@@ -311,7 +311,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'date': '2020-07-31', 'geo_processing': '4', 'radio_processing': 'SR'
                 },
                 'expected_collection': 'CBERS4_MUX_L4_SR',
-                'expected_item': 'CBERS4_MUX_155103_20200731_L4_SR'
+                'expected_item': 'CBERS4_MUX_155103_20200731'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/'
@@ -321,7 +321,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'date': '2020-07-31', 'geo_processing': '4', 'radio_processing': 'SR'
                 },
                 'expected_collection': 'CBERS4_MUX_L4_SR',
-                'expected_item': 'CBERS4_MUX_155103_20200731_L4_SR'
+                'expected_item': 'CBERS4_MUX_155103_20200731'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/'
@@ -331,7 +331,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'date': '2020-07-31', 'geo_processing': '4', 'radio_processing': 'SR'
                 },
                 'expected_collection': 'CBERS4_MUX_L4_SR',
-                'expected_item': 'CBERS4_MUX_155103_20200731_L4_SR'
+                'expected_item': 'CBERS4_MUX_155103_20200731'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/'
@@ -341,7 +341,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'date': '2020-07-31', 'geo_processing': '4', 'radio_processing': 'SR'
                 },
                 'expected_collection': 'CBERS4_MUX_L4_SR',
-                'expected_item': 'CBERS4_MUX_155103_20200731_L4_SR'
+                'expected_item': 'CBERS4_MUX_155103_20200731'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2018_01/CBERS_4_MUX_DRD_2018_01_01.13_14_00_CB11/'
@@ -351,7 +351,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'date': '2018-01-01', 'geo_processing': '4', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4_MUX_L4_DN',
-                'expected_item': 'CBERS4_MUX_156103_20180101_L4_DN'
+                'expected_item': 'CBERS4_MUX_156103_20180101'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2018_01/CBERS_4_MUX_DRD_2018_01_01.13_14_00_CB11/'
@@ -361,7 +361,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'date': '2018-01-01', 'geo_processing': '4', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4_MUX_L4_DN',
-                'expected_item': 'CBERS4_MUX_156103_20180101_L4_DN'
+                'expected_item': 'CBERS4_MUX_156103_20180101'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_PAN10M_DRD_2021_02_02.01_32_45_CB11/'
@@ -371,7 +371,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'date': '2021-02-01', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4_PAN10M_L2_DN',
-                'expected_item': 'CBERS4_PAN10M_073113_20210201_L2_DN'
+                'expected_item': 'CBERS4_PAN10M_073113_20210201'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_PAN10M_DRD_2021_02_02.01_32_45_CB11/'
@@ -381,7 +381,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'date': '2021-02-01', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4_PAN10M_L2_DN',
-                'expected_item': 'CBERS4_PAN10M_073113_20210201_L2_DN'
+                'expected_item': 'CBERS4_PAN10M_073113_20210201'
             }
         ]
 
@@ -441,7 +441,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'date': '2021-01-01', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4A_MUX_L2_DN',
-                'expected_item': 'CBERS4A_MUX_209110_20210101_L2_DN'
+                'expected_item': 'CBERS4A_MUX_209110_20210101'
             },
             {
                 'asset_path': '/TIFF/CBERS4A/2021_01/CBERS_4A_MUX_RAW_2021_01_01.13_48_30_ETC2/'
@@ -451,7 +451,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'date': '2021-01-01', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4A_MUX_L2_DN',
-                'expected_item': 'CBERS4A_MUX_209110_20210101_L2_DN'
+                'expected_item': 'CBERS4A_MUX_209110_20210101'
             },
             {
                 'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
@@ -461,7 +461,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'date': '2020-12-01', 'geo_processing': '3', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4A_MUX_L3_DN',
-                'expected_item': 'CBERS4A_MUX_209122_20201201_L3_DN'
+                'expected_item': 'CBERS4A_MUX_209122_20201201'
             },
             {
                 'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
@@ -471,7 +471,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'date': '2020-12-01', 'geo_processing': '3', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4A_MUX_L3_DN',
-                'expected_item': 'CBERS4A_MUX_209122_20201201_L3_DN'
+                'expected_item': 'CBERS4A_MUX_209122_20201201'
             },
             {
                 'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
@@ -481,7 +481,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'date': '2020-12-01', 'geo_processing': '4', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4A_MUX_L4_DN',
-                'expected_item': 'CBERS4A_MUX_209122_20201201_L4_DN'
+                'expected_item': 'CBERS4A_MUX_209122_20201201'
             },
             {
                 'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
@@ -491,7 +491,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'date': '2020-12-01', 'geo_processing': '4', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4A_MUX_L4_DN',
-                'expected_item': 'CBERS4A_MUX_209122_20201201_L4_DN'
+                'expected_item': 'CBERS4A_MUX_209122_20201201'
             },
             {
                 'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_22.13_53_30_ETC2_CHUNK/'
@@ -501,7 +501,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'date': '2020-12-22', 'geo_processing': '2B', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4A_WFI_L2B_DN',
-                'expected_item': 'CBERS4A_WFI_211108_20201222_L2B_DN'
+                'expected_item': 'CBERS4A_WFI_211108_20201222'
             },
             {
                 'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_22.13_53_30_ETC2_CHUNK/'
@@ -511,7 +511,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'date': '2020-12-22', 'geo_processing': '2B', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4A_WFI_L2B_DN',
-                'expected_item': 'CBERS4A_WFI_211108_20201222_L2B_DN'
+                'expected_item': 'CBERS4A_WFI_211108_20201222'
             },
             {
                 'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
@@ -521,7 +521,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'date': '2020-12-07', 'geo_processing': '4', 'radio_processing': 'SR'
                 },
                 'expected_collection': 'CBERS4A_WFI_L4_SR',
-                'expected_item': 'CBERS4A_WFI_214108_20201207_L4_SR'
+                'expected_item': 'CBERS4A_WFI_214108_20201207'
             },
             {
                 'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
@@ -531,7 +531,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'date': '2020-12-07', 'geo_processing': '4', 'radio_processing': 'SR'
                 },
                 'expected_collection': 'CBERS4A_WFI_L4_SR',
-                'expected_item': 'CBERS4A_WFI_214108_20201207_L4_SR'
+                'expected_item': 'CBERS4A_WFI_214108_20201207'
             },
             {
                 'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
@@ -541,7 +541,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'date': '2020-12-07', 'geo_processing': '4', 'radio_processing': 'SR'
                 },
                 'expected_collection': 'CBERS4A_WFI_L4_SR',
-                'expected_item': 'CBERS4A_WFI_214108_20201207_L4_SR'
+                'expected_item': 'CBERS4A_WFI_214108_20201207'
             },
             {
                 'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
@@ -551,7 +551,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'date': '2020-12-07', 'geo_processing': '4', 'radio_processing': 'SR'
                 },
                 'expected_collection': 'CBERS4A_WFI_L4_SR',
-                'expected_item': 'CBERS4A_WFI_214108_20201207_L4_SR'
+                'expected_item': 'CBERS4A_WFI_214108_20201207'
             },
             {
                 'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
@@ -561,7 +561,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'date': '2020-12-07', 'geo_processing': '4', 'radio_processing': 'SR'
                 },
                 'expected_collection': 'CBERS4A_WFI_L4_SR',
-                'expected_item': 'CBERS4A_WFI_214108_20201207_L4_SR'
+                'expected_item': 'CBERS4A_WFI_214108_20201207'
             },
             {
                 'asset_path': '/TIFF/CBERS4A/2019_12/CBERS_4A_WFI_RAW_2019_12_27.13_53_00_ETC2/'
@@ -571,7 +571,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'date': '2019-12-27', 'geo_processing': '4', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4A_WFI_L4_DN',
-                'expected_item': 'CBERS4A_WFI_215132_20191227_L4_DN'
+                'expected_item': 'CBERS4A_WFI_215132_20191227'
             },
             {
                 'asset_path': '/TIFF/CBERS4A/2019_12/CBERS_4A_WFI_RAW_2019_12_27.13_53_00_ETC2/'
@@ -581,7 +581,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'date': '2019-12-27', 'geo_processing': '4', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4A_WFI_L4_DN',
-                'expected_item': 'CBERS4A_WFI_215132_20191227_L4_DN'
+                'expected_item': 'CBERS4A_WFI_215132_20191227'
             },
             {
                 'asset_path': '/TIFF/CBERS4A/2020_11/CBERS_4A_WFI_RAW_2020_11_22.14_11_30_ETC2/'
@@ -591,7 +591,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'date': '2020-11-22', 'geo_processing': '3', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4A_WFI_L3_DN',
-                'expected_item': 'CBERS4A_WFI_217156_20201122_L3_DN'
+                'expected_item': 'CBERS4A_WFI_217156_20201122'
             },
             {
                 'asset_path': '/TIFF/CBERS4A/2020_11/CBERS_4A_WFI_RAW_2020_11_22.14_11_30_ETC2/'
@@ -601,7 +601,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'date': '2020-11-22', 'geo_processing': '3', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'CBERS4A_WFI_L3_DN',
-                'expected_item': 'CBERS4A_WFI_217156_20201122_L3_DN'
+                'expected_item': 'CBERS4A_WFI_217156_20201122'
             }
         ]
 
@@ -663,7 +663,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'date': '1973-05-21', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'LANDSAT1_MSS_L2_DN',
-                'expected_item': 'LANDSAT1_MSS_237059_19730521_L2_DN'
+                'expected_item': 'LANDSAT1_MSS_237059_19730521'
             },
             {
                 'asset_path': '/TIFF/LANDSAT1/1973_05/LANDSAT1_MSS_19730521.120000/237_059_0/'
@@ -673,7 +673,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'date': '1973-05-21', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'LANDSAT1_MSS_L2_DN',
-                'expected_item': 'LANDSAT1_MSS_237059_19730521_L2_DN'
+                'expected_item': 'LANDSAT1_MSS_237059_19730521'
             },
             {
                 'asset_path': '/TIFF/LANDSAT2/1982_02/LANDSAT2_MSS_19820201.120000/005_055_0/'
@@ -683,7 +683,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'date': '1982-02-01', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'LANDSAT2_MSS_L2_DN',
-                'expected_item': 'LANDSAT2_MSS_005055_19820201_L2_DN'
+                'expected_item': 'LANDSAT2_MSS_005055_19820201'
             },
             {
                 'asset_path': '/TIFF/LANDSAT2/1982_02/LANDSAT2_MSS_19820201.120000/005_055_0/'
@@ -693,7 +693,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'date': '1982-02-01', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'LANDSAT2_MSS_L2_DN',
-                'expected_item': 'LANDSAT2_MSS_005055_19820201_L2_DN'
+                'expected_item': 'LANDSAT2_MSS_005055_19820201'
             },
             {
                 'asset_path': '/TIFF/LANDSAT3/1978_04/LANDSAT3_MSS_19780405.120000/235_075_0/'
@@ -703,7 +703,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'date': '1978-04-05', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'LANDSAT3_MSS_L2_DN',
-                'expected_item': 'LANDSAT3_MSS_235075_19780405_L2_DN'
+                'expected_item': 'LANDSAT3_MSS_235075_19780405'
             },
             {
                 'asset_path': '/TIFF/LANDSAT3/1978_04/LANDSAT3_MSS_19780405.120000/235_075_0/'
@@ -713,7 +713,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'date': '1978-04-05', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'LANDSAT3_MSS_L2_DN',
-                'expected_item': 'LANDSAT3_MSS_235075_19780405_L2_DN'
+                'expected_item': 'LANDSAT3_MSS_235075_19780405'
             },
             {
                 'asset_path': '/TIFF/LANDSAT5/2011_11/LANDSAT5_TM_20111101.140950/233_054_0/'
@@ -723,7 +723,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'date': '2011-11-01', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'LANDSAT5_TM_L2_DN',
-                'expected_item': 'LANDSAT5_TM_233054_20111101_L2_DN'
+                'expected_item': 'LANDSAT5_TM_233054_20111101'
             },
             {
                 'asset_path': '/TIFF/LANDSAT5/2011_11/LANDSAT5_TM_20111101.140950/233_054_0/'
@@ -733,7 +733,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'date': '2011-11-01', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'LANDSAT5_TM_L2_DN',
-                'expected_item': 'LANDSAT5_TM_233054_20111101_L2_DN'
+                'expected_item': 'LANDSAT5_TM_233054_20111101'
             },
             {
                 'asset_path': '/TIFF/LANDSAT7/1999_07/LANDSAT7_ETM_19990731.144148/004_072_0/'
@@ -743,7 +743,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'date': '1999-07-31', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'LANDSAT7_ETM_L2_DN',
-                'expected_item': 'LANDSAT7_ETM_004072_19990731_L2_DN'
+                'expected_item': 'LANDSAT7_ETM_004072_19990731'
             },
             {
                 'asset_path': '/TIFF/LANDSAT7/1999_07/LANDSAT7_ETM_19990731.144148/004_072_0/'
@@ -753,7 +753,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'date': '1999-07-31', 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'LANDSAT7_ETM_L2_DN',
-                'expected_item': 'LANDSAT7_ETM_004072_19990731_L2_DN'
+                'expected_item': 'LANDSAT7_ETM_004072_19990731'
             }
         ]
 
@@ -807,18 +807,18 @@ class TestCDSRPackOtherBehaviors(TestCase):
                     'date': None, 'geo_processing': '2', 'radio_processing': 'DN'
                 },
                 'expected_collection': 'AMAZONIA1_WFI_L2_DN',
-                'expected_build_item_error': 'All values inside metadata dict must be strings, '
+                'expected_build_item_error': 'All mandatory values inside metadata dict must be strings, '
                                              'but the following keys are not: `date`.'
             },
             {
                 'metadata': {
-                    'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '217', 'row': '015',
+                    'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '217', 'row': None,
                     'date': '2021-03-03', 'geo_processing': '2', 'radio_processing': None
                 },
-                'expected_build_collection_error': 'All values inside metadata dict must be '
+                'expected_build_collection_error': 'All mandatory values inside metadata dict must be '
                                     'strings, but the following keys are not: `radio_processing`.',
-                'expected_build_item_error': 'All values inside metadata dict must be strings, '
-                                    'but the following keys are not: `radio_processing`.'
+                'expected_build_item_error': 'All mandatory values inside metadata dict must be strings, '
+                                    'but the following keys are not: `row`.'
             }
         ]
 
@@ -945,21 +945,20 @@ class TestCDSRPackErrors(TestCase):
                 'expected_build_collection_error': 'Missing keys inside metadata: '
                                         '`satellite, geo_processing, radio_processing`.',
                 'expected_build_item_error': 'Missing keys inside metadata: `satellite, '
-                                        'path, row, date, geo_processing, radio_processing`.'
+                                        'path, row, date`.'
             },
             {
                 'metadata': {'radio_processing': 'SR'},
                 'expected_build_collection_error': 'Missing keys inside metadata: '
                                                    '`satellite, sensor, geo_processing`.',
                 'expected_build_item_error': 'Missing keys inside metadata: `satellite, sensor, '
-                                             'path, row, date, geo_processing`.',
+                                             'path, row, date`.',
             },
             {
                 'metadata': {'satellite': 'AMAZONIA1', 'sensor': 'WFI'},
                 'expected_build_collection_error': 'Missing keys inside metadata: '
                                                    '`geo_processing, radio_processing`.',
-                'expected_build_item_error': 'Missing keys inside metadata: `path, row, date, '
-                                             'geo_processing, radio_processing`.'
+                'expected_build_item_error': 'Missing keys inside metadata: `path, row, date`.'
             }
         ]
 
