@@ -40,7 +40,7 @@ def build_item(metadata: dict) -> str:
         raise CDSRBuilderException(f'Metadata must be a dict, not a `{type(metadata)}`.')
 
     # mandatory keys
-    keys = ['satellite', 'sensor', 'path', 'row', 'date', 'geo_processing', 'radio_processing']
+    keys = ['satellite', 'sensor', 'path', 'row', 'date']
 
     # get all keys that are missing inside metadata dict
     missing_keys = [k for k in keys if k not in metadata]
@@ -56,5 +56,4 @@ def build_item(metadata: dict) -> str:
                                   f"the following keys are not: `{', '.join(not_str_keys)}`.")
 
     return f"{metadata['satellite']}_{metadata['sensor']}_" \
-           f"{metadata['path']}{metadata['row']}_{metadata['date'].replace('-', '')}_" \
-           f"L{metadata['geo_processing']}_{metadata['radio_processing']}"
+           f"{metadata['path']}{metadata['row']}_{metadata['date'].replace('-', '')}"
