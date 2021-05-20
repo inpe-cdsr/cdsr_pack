@@ -1,18 +1,36 @@
-# version
+# version specification
 
 https://packaging.python.org/specifications/core-metadata/#version
 
 
-# development
+# example of versions
+
+X.YaN.devM       # Developmental release of an alpha release
+X.YbN.devM       # Developmental release of a beta release
+X.YrcN.devM      # Developmental release of a release candidate
+X.Y.postN.devM   # Developmental release of a post-release
+X.YaN   # Alpha release
+X.YbN   # Beta release
+X.YrcN  # Release Candidate
+X.Y     # Final release
+X.YaN.postM   # Post-release of an alpha release
+X.YbN.postM   # Post-release of a beta release
+X.YrcN.postM  # Post-release of a release candidate
+
+
+# development build
 
 ```
+$ pyenv activate inpe_cdsr_cdsr_pack
 $ clear && rm -r build dist &&
-    python3 -m build && python3 -m twine upload --repository testpypi dist/*
+    python -m build && python -m twine upload --repository testpypi dist/*
 ```
 
-# production
+
+# production build
 
 ```
+$ pyenv activate inpe_cdsr_cdsr_pack
 $ clear && rm -r build dist &&
-    python3 -m build && python3 -m twine upload dist/*
+    python -m build && python -m twine upload dist/*
 ```
