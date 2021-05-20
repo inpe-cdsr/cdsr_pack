@@ -32,7 +32,7 @@ Look at [here](https://pypi.org/project/cdsr-pack/#history) to see the available
 'AMAZONIA1_WFI_L2_DN'
 
 >>> build_item(decoded_image)
-'AMAZONIA1_WFI_217015_20210303_L2_DN'
+'AMAZONIA1_WFI_217015_20210303'
 ```
 
 ## Development
