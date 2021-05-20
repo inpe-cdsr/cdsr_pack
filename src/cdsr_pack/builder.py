@@ -25,7 +25,7 @@ def build_collection(metadata: dict) -> str:
     not_str_keys = [k for k in keys if not isinstance(metadata[k], str)]
 
     if not_str_keys:
-        raise CDSRBuilderException("All values inside metadata dict must be strings, but "
+        raise CDSRBuilderException("All mandatory values inside metadata dict must be strings, but "
                                   f"the following keys are not: `{', '.join(not_str_keys)}`.")
 
     return f"{metadata['satellite']}_{metadata['sensor']}_" \
@@ -52,7 +52,7 @@ def build_item(metadata: dict) -> str:
     not_str_keys = [k for k in keys if not isinstance(metadata[k], str)]
 
     if not_str_keys:
-        raise CDSRBuilderException("All values inside metadata dict must be strings, but "
+        raise CDSRBuilderException("All mandatory values inside metadata dict must be strings, but "
                                   f"the following keys are not: `{', '.join(not_str_keys)}`.")
 
     return f"{metadata['satellite']}_{metadata['sensor']}_" \
