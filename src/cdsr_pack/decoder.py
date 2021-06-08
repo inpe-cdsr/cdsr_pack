@@ -1,13 +1,14 @@
 """decoder.py module."""
 
 from os.path import sep as os_path_sep
+from typing import Tuple
 
 
 class CDSRDecoderException(Exception):
     """CDSRDecoderException."""
 
 
-def decode_scene_dir(scene_dir):
+def decode_scene_dir(scene_dir: str) -> Tuple[str, str, str, str]:
     """Decodes a scene directory, returning its information."""
 
     scene_dir_first, scene_dir_second = scene_dir.split('.')
@@ -60,7 +61,7 @@ def decode_scene_dir(scene_dir):
     return satellite, sensor, date, time
 
 
-def decode_path_row_dir(path_row_dir):
+def decode_path_row_dir(path_row_dir: str) -> Tuple[str, str]:
     """Decodes a path/row directory, returning its information."""
 
     splitted_path_row = path_row_dir.split('_')
@@ -77,7 +78,7 @@ def decode_path_row_dir(path_row_dir):
     return path, row
 
 
-def decode_geo_processing_dir(geo_processing_dir):
+def decode_geo_processing_dir(geo_processing_dir: str) -> str:
     """Decodes a geo. processing directory, returning its information."""
 
     geo_processing = geo_processing_dir.split('_')[0]
@@ -89,14 +90,14 @@ def decode_geo_processing_dir(geo_processing_dir):
                               f'be decoded: `{geo_processing_dir}`.')
 
 
-def decode_asset(asset):
+def decode_asset(asset: str) -> Tuple[str, str]:
     """Decodes a asset file, returning if this file is DN or SR.
     Asset example: `AMAZONIA_1_WFI_20210321_037_016_L2_BAND4.tif`"""
 
     # asset example: AMAZONIA_1_WFI_20210321_037_016_L2_BAND4.tif
 
-    if not asset.endswith('.tif') and not asset.endswith('.xml'):
-        raise CDSRDecoderException('Just TIFF and XML files can be decoded.')
+    if "." not in asset:
+        raise CDSRDecoderException('An asset must have an extension.')
 
     # get date from asset
     date = asset.split('_')[3]
