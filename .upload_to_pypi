@@ -17,6 +17,21 @@ X.YaN.postM   # Post-release of an alpha release
 X.YbN.postM   # Post-release of a beta release
 X.YrcN.postM  # Post-release of a release candidate
 
+## examples:
+
+3.9 development
+3.9.0 alpha 1: Tuesday, 2000-11-20
+3.9.0 alpha 2: Wednesday, 2000-12-22
+3.9.0 alpha 3: Saturday, 2000-01-30
+...
+3.9.0 beta 1: Monday, 2003-06-18
+3.9.0 beta 3: Tuesday, 2003-07-10
+3.9.0 beta 4: Friday, 2003-08-04
+...
+3.9.0 candidate 1: Tuesday, 2006-09-13
+3.9.0 candidate 2: Thursday, 2006-11-10
+3.9.0 final: Monday, 2007-12-05
+
 
 # development build
 
