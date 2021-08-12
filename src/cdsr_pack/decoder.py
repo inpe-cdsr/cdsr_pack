@@ -40,22 +40,16 @@ def decode_scene_dir(scene_dir: str) -> Tuple[str, str, str, str, str]:
         # join the time parts from the list of parts
         reception_time = ':'.join(second_part[0:3])
 
-        # default value to antenna
-        # this is the only one possible value to CBERS_4A satellite
-        antenna = 'ETC2'
+        # get the antenna and server part from the list of parts
+        antenna_and_server = second_part[3:]
 
-        # if satellite is either AMAZONIA_1 or CBERS_4
-        if scene_dir_first.startswith('AMAZONIA_1_') or scene_dir_first.startswith('CBERS_4_'):
-            # get the antenna and server part from the list of parts
-            antenna_and_server = second_part[3:]
+        # if there is not at least one element (i.e. antenna), then raise an exception
+        if not antenna_and_server:
+            raise CDSRDecoderException('Invalid antenna and server data: '
+                                        f'`{antenna_and_server}`.')
 
-            # if there is not at least one element (i.e. antenna), then raise an exception
-            if not antenna_and_server:
-                raise CDSRDecoderException('Invalid antenna and server data: '
-                                          f'`{antenna_and_server}`.')
-
-            # get antenna datum from the list of parts
-            antenna = antenna_and_server[0]
+        # get antenna datum from the list of parts
+        antenna = antenna_and_server[0]
 
     elif scene_dir_first.startswith('CBERS2B') or scene_dir_first.startswith('LANDSAT'):
         # examples:
