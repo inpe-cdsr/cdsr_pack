@@ -8,57 +8,85 @@ class CDSRDecoderException(Exception):
     """CDSRDecoderException."""
 
 
-def decode_scene_dir(scene_dir: str) -> Tuple[str, str, str, str]:
-    """Decodes a scene directory, returning its information."""
+def decode_scene_dir(scene_dir: str) -> Tuple[str, str, str, str, str]:
+    """Decodes a scene directory, returning its data."""
 
     scene_dir_first, scene_dir_second = scene_dir.split('.')
 
     if scene_dir_first.startswith('AMAZONIA_1') or scene_dir_first.startswith('CBERS_4'):
         # examples:
+        # - AMAZONIA_1_WFI_DRD_2021_04_01.13_22_45_CP5_COROT
         # - AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11
         # - AMAZONIA_1_WFI_DRD_2021_03_03.14_35_23_CB11_SIR18
         # - CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11
         # - CBERS_4A_MUX_RAW_2019_12_27.13_53_00_ETC2
+        # - CBERS_4A_MUX_RAW_2020_04_06.00_56_20_CP5
         # - CBERS_4A_MUX_RAW_2019_12_28.14_15_00
 
-        satellite, number, sensor, _, *date = scene_dir_first.split('_')
+        # get the data from the first part of scene dir
+        satellite, number, sensor, _, *reception_date = scene_dir_first.split('_')
         # create satellite name with its number
         satellite = satellite + number
-        date = '-'.join(date)
-        time = scene_dir_second.split('_')
+        reception_date = '-'.join(reception_date)
 
-        if len(time) >= 3:
-            # get the time part from the list of parts
-            # `time` can be: `13_53_00`, `13_53_00_ETC2`, `14_35_23_CB11_SIR18`, etc.
-            time = ':'.join(time[0:3])
-        else:
-            raise CDSRDecoderException(f'Invalid spplited time: `{scene_dir_second}`.')
+        # second part of scene dir, it can be: `13_53_00`,
+        # `13_53_00_ETC2`, `14_35_23_CB11_SIR18`, etc.
+        second_part = scene_dir_second.split('_')
+
+        # I need at least three elements to create the time datum
+        if len(second_part) < 3:
+            raise CDSRDecoderException(f'Invalid second part of scene dir: `{scene_dir_second}`.')
+
+        # join the time parts from the list of parts
+        reception_time = ':'.join(second_part[0:3])
+
+        # default value to antenna
+        # this is the only one possible value to CBERS_4A satellite
+        antenna = 'ETC2'
+
+        # if satellite is either AMAZONIA_1 or CBERS_4
+        if scene_dir_first.startswith('AMAZONIA_1_') or scene_dir_first.startswith('CBERS_4_'):
+            # get the antenna and server part from the list of parts
+            antenna_and_server = second_part[3:]
+
+            # if there is not at least one element (i.e. antenna), then raise an exception
+            if not antenna_and_server:
+                raise CDSRDecoderException('Invalid antenna and server data: '
+                                          f'`{antenna_and_server}`.')
+
+            # get antenna datum from the list of parts
+            antenna = antenna_and_server[0]
 
     elif scene_dir_first.startswith('CBERS2B') or scene_dir_first.startswith('LANDSAT'):
-        # examples: CBERS2B_CCD_20070925.145654
-        # or LANDSAT1_MSS_19750907.130000
+        # examples:
+        # - CBERS2B_CCD_20070925.145654
+        # - LANDSAT1_MSS_19750907.130000
 
-        satellite, sensor, date = scene_dir_first.split('_')
-        time = scene_dir_second
+        satellite, sensor, reception_date = scene_dir_first.split('_')
+        reception_time = scene_dir_second
 
-        if len(date) != 8:
+        if len(reception_date) != 8:
             # example: a date should be something like this: '20070925'
-            raise CDSRDecoderException(f'Size of `{date}` date is not 8.')
+            raise CDSRDecoderException(f'Size of `{reception_date}` reception date is not 8.')
 
         # I build the date string based on the old one (e.g. from '20070925' to '2007-09-25')
-        date = f'{date[0:4]}-{date[4:6]}-{date[6:8]}'
+        reception_date = f'{reception_date[0:4]}-{reception_date[4:6]}-{reception_date[6:8]}'
 
-        if len(time) != 6:
+        if len(reception_time) != 6:
             # example: a time should be something like this: '145654'
-            raise CDSRDecoderException(f'Size of `{time}` time is not 6.')
+            raise CDSRDecoderException(f'Size of `{reception_time}` reception time is not 6.')
 
         # I build the time string based on the old one (e.g. from '145654' to '14:56:54')
-        time = f'{time[0:2]}:{time[2:4]}:{time[4:6]}'
+        reception_time = f'{reception_time[0:2]}:{reception_time[2:4]}:{reception_time[4:6]}'
+
+        # default value to antenna, because these satellites do
+        # not have antenna datum on their scene directory
+        antenna = 'CP'
 
     else:
         raise CDSRDecoderException(f'Invalid scene directory: `{scene_dir}`.')
 
-    return satellite, sensor, date, time
+    return satellite, sensor, reception_date, reception_time, antenna
 
 
 def decode_path_row_dir(path_row_dir: str) -> Tuple[str, str]:
@@ -155,7 +183,7 @@ def decode_path(path: str) -> dict:
 
     # extract metadata
     _, metadata['satellite'], _, scene_dir, path_row_dir, geo_processing_dir, *_ = splitted_path
-    _, metadata['sensor'], *_ = decode_scene_dir(scene_dir)
+    _, metadata['sensor'], *_, metadata['antenna'] = decode_scene_dir(scene_dir)
     metadata['path'], metadata['row'] = decode_path_row_dir(path_row_dir)
     metadata['geo_processing'] = decode_geo_processing_dir(geo_processing_dir)
 
