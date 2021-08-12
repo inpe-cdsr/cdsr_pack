@@ -13,27 +13,73 @@ class TestCDSRPackAMAZONIA1(TestCase):
         """Tests valid AMAZONIA1 assets."""
 
         test_cases = [
-            '/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11/'
-                '217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif',
-            '/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11/'
-                '217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND3.xml',
-            '/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11/'
-                '217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND3.json',
-            '/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11/'
-                '217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015.png'
+            {
+                'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11'
+                    '/217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif'),
+                'expected_metadata': {
+                    'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '217', 'row': '015',
+                    'date': '2021-03-03', 'geo_processing': '2', 'radio_processing': 'DN',
+                    'antenna': 'CB11'
+                },
+                'expected_collection': 'AMAZONIA1_WFI_L2_DN',
+                'expected_item': 'AMAZONIA1_WFI_217015_20210303'
+            },
+            {
+                'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11'
+                    '/217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND3.xml'),
+                'expected_metadata': {
+                    'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '217', 'row': '015',
+                    'date': '2021-03-03', 'geo_processing': '2', 'radio_processing': 'DN',
+                    'antenna': 'CB11'
+                },
+                'expected_collection': 'AMAZONIA1_WFI_L2_DN',
+                'expected_item': 'AMAZONIA1_WFI_217015_20210303'
+            },
+            {
+                'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11'
+                    '/217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND3.json'),
+                'expected_metadata': {
+                    'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '217', 'row': '015',
+                    'date': '2021-03-03', 'geo_processing': '2', 'radio_processing': 'DN',
+                    'antenna': 'CB11'
+                },
+                'expected_collection': 'AMAZONIA1_WFI_L2_DN',
+                'expected_item': 'AMAZONIA1_WFI_217015_20210303'
+            },
+            {
+                'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11'
+                    '/217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015.png'),
+                'expected_metadata': {
+                    'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '217', 'row': '015',
+                    'date': '2021-03-03', 'geo_processing': '2', 'radio_processing': 'DN',
+                    'antenna': 'CB11'
+                },
+                'expected_collection': 'AMAZONIA1_WFI_L2_DN',
+                'expected_item': 'AMAZONIA1_WFI_217015_20210303'
+            },
+            {
+                'asset_path': ('/TIFF/AMAZONIA1/2021_04/AMAZONIA_1_WFI_DRD_2021_04_01.13_22_45_CP5_'
+                    'COROT/035_016_0/4_BC_LCC_WGS84/AMAZONIA_1_WFI_20210401_035_016_L4_BAND1.tif'),
+                'expected_metadata': {
+                    'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '035', 'row': '016',
+                    'date': '2021-04-01', 'geo_processing': '4', 'radio_processing': 'DN',
+                    'antenna': 'CP5'
+                },
+                'expected_collection': 'AMAZONIA1_WFI_L4_DN',
+                'expected_item': 'AMAZONIA1_WFI_035016_20210401'
+            }
         ]
 
-        expected_metadata = {
-            'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '217', 'row': '015',
-            'date': '2021-03-03', 'geo_processing': '2', 'radio_processing': 'DN',
-            'antenna': 'CB11'
-        }
-
         for test_case in test_cases:
-            self.assertEqual(expected_metadata, decode_path(test_case))
-
-        self.assertEqual('AMAZONIA1_WFI_L2_DN', build_collection(expected_metadata))
-        self.assertEqual('AMAZONIA1_WFI_217015_20210303', build_item(expected_metadata))
+            # check if decode_path function works
+            self.assertEqual(test_case['expected_metadata'],
+                             decode_path(test_case['asset_path']))
+            # check if build_collection function works
+            self.assertEqual(test_case['expected_collection'],
+                             build_collection(test_case['expected_metadata']))
+            # check if build_item function works
+            self.assertEqual(test_case['expected_item'],
+                             build_item(test_case['expected_metadata']))
 
     def test__amazonia1__valid_paths(self):
         """Tests valid AMAZONIA1 paths."""
@@ -358,8 +404,8 @@ class TestCDSRPackCBERS4(TestCase):
                 'expected_item': 'CBERS4_AWFI_154117_20210201'
             },
             {
-                'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/'
-                    '154_117_0/4_BC_UTM_WGS84/CBERS_4_AWFI_20210201_154_117_L4_CMASK_GRID_SURFACE.tif',
+                'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/154_'
+                    '117_0/4_BC_UTM_WGS84/CBERS_4_AWFI_20210201_154_117_L4_CMASK_GRID_SURFACE.tif',
                 'expected_metadata': {
                     'satellite': 'CBERS4', 'sensor': 'AWFI', 'path': '154', 'row': '117',
                     'date': '2021-02-01', 'geo_processing': '4', 'radio_processing': 'SR',
@@ -369,8 +415,8 @@ class TestCDSRPackCBERS4(TestCase):
                 'expected_item': 'CBERS4_AWFI_154117_20210201'
             },
             {
-                'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/'
-                    '154_117_0/4_BC_UTM_WGS84/CBERS_4_AWFI_20210201_154_117_L4_BAND13_GRID_SURFACE.xml',
+                'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/154_'
+                    '117_0/4_BC_UTM_WGS84/CBERS_4_AWFI_20210201_154_117_L4_BAND13_GRID_SURFACE.xml',
                 'expected_metadata': {
                     'satellite': 'CBERS4', 'sensor': 'AWFI', 'path': '154', 'row': '117',
                     'date': '2021-02-01', 'geo_processing': '4', 'radio_processing': 'SR',
@@ -402,8 +448,8 @@ class TestCDSRPackCBERS4(TestCase):
                 'expected_item': 'CBERS4_MUX_155103_20200731'
             },
             {
-                'asset_path': '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/'
-                    '155_103_0/4_BC_UTM_WGS84/CBERS_4_MUX_20200731_155_103_L4_BAND5_GRID_SURFACE.tif',
+                'asset_path': '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/155_'
+                    '103_0/4_BC_UTM_WGS84/CBERS_4_MUX_20200731_155_103_L4_BAND5_GRID_SURFACE.tif',
                 'expected_metadata': {
                     'satellite': 'CBERS4', 'sensor': 'MUX', 'path': '155', 'row': '103',
                     'date': '2020-07-31', 'geo_processing': '4', 'radio_processing': 'SR',
@@ -413,8 +459,8 @@ class TestCDSRPackCBERS4(TestCase):
                 'expected_item': 'CBERS4_MUX_155103_20200731'
             },
             {
-                'asset_path': '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/'
-                    '155_103_0/4_BC_UTM_WGS84/CBERS_4_MUX_20200731_155_103_L4_BAND5_GRID_SURFACE.xml',
+                'asset_path': '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/155_'
+                    '103_0/4_BC_UTM_WGS84/CBERS_4_MUX_20200731_155_103_L4_BAND5_GRID_SURFACE.xml',
                 'expected_metadata': {
                     'satellite': 'CBERS4', 'sensor': 'MUX', 'path': '155', 'row': '103',
                     'date': '2020-07-31', 'geo_processing': '4', 'radio_processing': 'SR',
@@ -479,8 +525,8 @@ class TestCDSRPackCBERS4(TestCase):
                 'expected_item': 'CBERS4_AWFI_154117_20210201'
             },
             {
-                'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/154_117_0/'
-                                '4_BC_UTM_WGS84/CBERS_4_AWFI_20210201_154_117_L4_CMASK_GRID_SURFACE.json',
+                'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/154_'
+                    '117_0/4_BC_UTM_WGS84/CBERS_4_AWFI_20210201_154_117_L4_CMASK_GRID_SURFACE.json',
                 'expected_metadata': {
                     'satellite': 'CBERS4', 'sensor': 'AWFI', 'path': '154', 'row': '117',
                     'date': '2021-02-01', 'geo_processing': '4', 'radio_processing': 'SR',
@@ -574,8 +620,8 @@ class TestCDSRPackCBERS4A(TestCase):
 
         test_cases = [
             {
-                'asset_path': '/TIFF/CBERS4A/2021_01/CBERS_4A_MUX_RAW_2021_01_01.13_48_30_ETC2/'
-                        '209_110_0/2_BC_UTM_WGS84/CBERS_4A_MUX_20210101_209_110_L2_BAND5.tif',
+                'asset_path': ('/TIFF/CBERS4A/2021_01/CBERS_4A_MUX_RAW_2021_01_01.13_48_30_ETC2/'
+                        '209_110_0/2_BC_UTM_WGS84/CBERS_4A_MUX_20210101_209_110_L2_BAND5.tif'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'MUX', 'path': '209', 'row': '110',
                     'date': '2021-01-01', 'geo_processing': '2', 'radio_processing': 'DN',
@@ -585,8 +631,8 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_MUX_209110_20210101'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2021_01/CBERS_4A_MUX_RAW_2021_01_01.13_48_30_ETC2/'
-                        '209_110_0/2_BC_UTM_WGS84/CBERS_4A_MUX_20210101_209_110_L2_BAND5.xml',
+                'asset_path': ('/TIFF/CBERS4A/2021_01/CBERS_4A_MUX_RAW_2021_01_01.13_48_30_ETC2/'
+                        '209_110_0/2_BC_UTM_WGS84/CBERS_4A_MUX_20210101_209_110_L2_BAND5.xml'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'MUX', 'path': '209', 'row': '110',
                     'date': '2021-01-01', 'geo_processing': '2', 'radio_processing': 'DN',
@@ -596,8 +642,8 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_MUX_209110_20210101'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
-                        '209_122_0/3_BC_UTM_WGS84/CBERS_4A_MUX_20201201_209_122_L3_BAND5.tif',
+                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
+                        '209_122_0/3_BC_UTM_WGS84/CBERS_4A_MUX_20201201_209_122_L3_BAND5.tif'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'MUX', 'path': '209', 'row': '122',
                     'date': '2020-12-01', 'geo_processing': '3', 'radio_processing': 'DN',
@@ -607,8 +653,8 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_MUX_209122_20201201'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
-                        '209_122_0/3_BC_UTM_WGS84/CBERS_4A_MUX_20201201_209_122_L3_BAND5.xml',
+                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
+                        '209_122_0/3_BC_UTM_WGS84/CBERS_4A_MUX_20201201_209_122_L3_BAND5.xml'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'MUX', 'path': '209', 'row': '122',
                     'date': '2020-12-01', 'geo_processing': '3', 'radio_processing': 'DN',
@@ -618,8 +664,8 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_MUX_209122_20201201'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
-                        '209_122_0/4_BC_UTM_WGS84/CBERS_4A_MUX_20201201_209_122_L4_BAND5.tif',
+                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
+                        '209_122_0/4_BC_UTM_WGS84/CBERS_4A_MUX_20201201_209_122_L4_BAND5.tif'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'MUX', 'path': '209', 'row': '122',
                     'date': '2020-12-01', 'geo_processing': '4', 'radio_processing': 'DN',
@@ -629,8 +675,8 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_MUX_209122_20201201'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
-                        '209_122_0/4_BC_UTM_WGS84/CBERS_4A_MUX_20201201_209_122_L4_BAND5.xml',
+                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
+                        '209_122_0/4_BC_UTM_WGS84/CBERS_4A_MUX_20201201_209_122_L4_BAND5.xml'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'MUX', 'path': '209', 'row': '122',
                     'date': '2020-12-01', 'geo_processing': '4', 'radio_processing': 'DN',
@@ -640,8 +686,8 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_MUX_209122_20201201'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_22.13_53_30_ETC2_CHUNK/'
-                            '211_108_0/2B_BC_UTM_WGS84/CBERS_4A_WFI_20201222_211_108_L2B_BAND13.tif',
+                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_22.13_53_30_ETC2_'
+                    'CHUNK/211_108_0/2B_BC_UTM_WGS84/CBERS_4A_WFI_20201222_211_108_L2B_BAND13.tif'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'WFI', 'path': '211', 'row': '108',
                     'date': '2020-12-22', 'geo_processing': '2B', 'radio_processing': 'DN',
@@ -651,8 +697,8 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_WFI_211108_20201222'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_22.13_53_30_ETC2_CHUNK/'
-                            '211_108_0/2B_BC_UTM_WGS84/CBERS_4A_WFI_20201222_211_108_L2B_BAND14.xml',
+                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_22.13_53_30_ETC2_'
+                    'CHUNK/211_108_0/2B_BC_UTM_WGS84/CBERS_4A_WFI_20201222_211_108_L2B_BAND14.xml'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'WFI', 'path': '211', 'row': '108',
                     'date': '2020-12-22', 'geo_processing': '2B', 'radio_processing': 'DN',
@@ -662,8 +708,8 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_WFI_211108_20201222'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
-                        '214_108_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20201207_214_108_L4_LEFT_EVI.tif',
+                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
+                    '214_108_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20201207_214_108_L4_LEFT_EVI.tif'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'WFI', 'path': '214', 'row': '108',
                     'date': '2020-12-07', 'geo_processing': '4', 'radio_processing': 'SR',
@@ -673,8 +719,8 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_WFI_214108_20201207'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
-                        '214_108_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20201207_214_108_L4_LEFT_NDVI.tif',
+                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
+                        '214_108_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20201207_214_108_L4_LEFT_NDVI.tif'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'WFI', 'path': '214', 'row': '108',
                     'date': '2020-12-07', 'geo_processing': '4', 'radio_processing': 'SR',
@@ -684,8 +730,9 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_WFI_214108_20201207'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
-                    '214_108_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20201207_214_108_L4_LEFT_CMASK_GRID_SURFACE.tif',
+                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
+                              '214_108_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20201207_214_108_L4_LEFT_'
+                              'CMASK_GRID_SURFACE.tif'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'WFI', 'path': '214', 'row': '108',
                     'date': '2020-12-07', 'geo_processing': '4', 'radio_processing': 'SR',
@@ -695,8 +742,9 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_WFI_214108_20201207'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
-                    '214_108_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20201207_214_108_L4_LEFT_BAND13_GRID_SURFACE.tif',
+                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
+                               '214_108_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20201207_214_108_L4_LEFT_'
+                               'BAND13_GRID_SURFACE.tif'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'WFI', 'path': '214', 'row': '108',
                     'date': '2020-12-07', 'geo_processing': '4', 'radio_processing': 'SR',
@@ -706,8 +754,9 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_WFI_214108_20201207'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
-                    '214_108_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20201207_214_108_L4_LEFT_BAND13_GRID_SURFACE.xml',
+                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
+                               '214_108_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20201207_214_108_L4_LEFT_'
+                               'BAND13_GRID_SURFACE.xml'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'WFI', 'path': '214', 'row': '108',
                     'date': '2020-12-07', 'geo_processing': '4', 'radio_processing': 'SR',
@@ -717,8 +766,8 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_WFI_214108_20201207'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2019_12/CBERS_4A_WFI_RAW_2019_12_27.13_53_00_ETC2/'
-                            '215_132_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20191227_215_132_L4_BAND13.tif',
+                'asset_path': ('/TIFF/CBERS4A/2019_12/CBERS_4A_WFI_RAW_2019_12_27.13_53_00_ETC2/'
+                            '215_132_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20191227_215_132_L4_BAND13.tif'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'WFI', 'path': '215', 'row': '132',
                     'date': '2019-12-27', 'geo_processing': '4', 'radio_processing': 'DN',
@@ -728,8 +777,8 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_WFI_215132_20191227'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2019_12/CBERS_4A_WFI_RAW_2019_12_27.13_53_00_ETC2/'
-                        '215_132_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20191227_215_132_L4_LEFT_BAND15.xml',
+                'asset_path': ('/TIFF/CBERS4A/2019_12/CBERS_4A_WFI_RAW_2019_12_27.13_53_00_ETC2/'
+                    '215_132_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20191227_215_132_L4_LEFT_BAND15.xml'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'WFI', 'path': '215', 'row': '132',
                     'date': '2019-12-27', 'geo_processing': '4', 'radio_processing': 'DN',
@@ -739,8 +788,8 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_WFI_215132_20191227'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2020_11/CBERS_4A_WFI_RAW_2020_11_22.14_11_30_ETC2/'
-                        '217_156_0/3_BC_UTM_WGS84/CBERS_4A_WFI_20201122_217_156_L3_BAND13.tif',
+                'asset_path': ('/TIFF/CBERS4A/2020_11/CBERS_4A_WFI_RAW_2020_11_22.14_11_30_ETC2/'
+                    '217_156_0/3_BC_UTM_WGS84/CBERS_4A_WFI_20201122_217_156_L3_BAND13.tif'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'WFI', 'path': '217', 'row': '156',
                     'date': '2020-11-22', 'geo_processing': '3', 'radio_processing': 'DN',
@@ -750,8 +799,8 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_WFI_217156_20201122'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2020_11/CBERS_4A_WFI_RAW_2020_11_22.14_11_30_ETC2/'
-                        '217_156_0/3_BC_UTM_WGS84/CBERS_4A_WFI_20201122_217_156_L3_BAND14.xml',
+                'asset_path': ('/TIFF/CBERS4A/2020_11/CBERS_4A_WFI_RAW_2020_11_22.14_11_30_ETC2/'
+                        '217_156_0/3_BC_UTM_WGS84/CBERS_4A_WFI_20201122_217_156_L3_BAND14.xml'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'WFI', 'path': '217', 'row': '156',
                     'date': '2020-11-22', 'geo_processing': '3', 'radio_processing': 'DN',
@@ -761,8 +810,8 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_WFI_217156_20201122'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2021_01/CBERS_4A_MUX_RAW_2021_01_01.13_48_30_ETC2/'
-                                '209_110_0/2_BC_UTM_WGS84/CBERS_4A_MUX_20210101_209_110.png',
+                'asset_path': ('/TIFF/CBERS4A/2021_01/CBERS_4A_MUX_RAW_2021_01_01.13_48_30_ETC2/'
+                               '209_110_0/2_BC_UTM_WGS84/CBERS_4A_MUX_20210101_209_110.png'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'MUX', 'path': '209', 'row': '110',
                     'date': '2021-01-01', 'geo_processing': '2', 'radio_processing': 'DN',
@@ -772,8 +821,8 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_MUX_209110_20210101'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
-                                '209_122_0/3_BC_UTM_WGS84/CBERS_4A_MUX_20201201_209_122.png',
+                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
+                               '209_122_0/3_BC_UTM_WGS84/CBERS_4A_MUX_20201201_209_122.png'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'MUX', 'path': '209', 'row': '122',
                     'date': '2020-12-01', 'geo_processing': '3', 'radio_processing': 'DN',
@@ -783,8 +832,8 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_MUX_209122_20201201'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2019_12/CBERS_4A_WFI_RAW_2019_12_27.13_53_00_ETC2/'
-                                '215_132_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20191227_215_132.png',
+                'asset_path': ('/TIFF/CBERS4A/2019_12/CBERS_4A_WFI_RAW_2019_12_27.13_53_00_ETC2/'
+                               '215_132_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20191227_215_132.png'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'WFI', 'path': '215', 'row': '132',
                     'date': '2019-12-27', 'geo_processing': '4', 'radio_processing': 'DN',
@@ -794,8 +843,8 @@ class TestCDSRPackCBERS4A(TestCase):
                 'expected_item': 'CBERS4A_WFI_215132_20191227'
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_22.13_53_30_ETC2_CHUNK/'
-                                '211_108_0/2B_BC_UTM_WGS84/CBERS_4A_WFI_20201222_211_108.png',
+                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_22.13_53_30_ETC2_'
+                               'CHUNK/211_108_0/2B_BC_UTM_WGS84/CBERS_4A_WFI_20201222_211_108.png'),
                 'expected_metadata': {
                     'satellite': 'CBERS4A', 'sensor': 'WFI', 'path': '211', 'row': '108',
                     'date': '2020-12-22', 'geo_processing': '2B', 'radio_processing': 'DN',
@@ -1111,44 +1160,45 @@ class TestCDSRPackErrors(TestCase):
                 'expected': "Path must be a str, not a `<class 'list'>`."
             },
             {
-                'asset_path': '/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57/'
-                              '217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif',
+                'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57/'
+                    '217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif'),
                 'expected': 'Invalid second part of scene dir: `12_57`.'
             },
             {
-                'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_CCD_201001.130915/151_098_0/'
-                              '2_BC_UTM_WGS84/CBERS_2B_CCD2XS_20100301_151_098_L2_BAND1.tif',
+                'asset_path': ('/TIFF/CBERS2B/2010_03/CBERS2B_CCD_201001.130915/151_098_0/'
+                              '2_BC_UTM_WGS84/CBERS_2B_CCD2XS_20100301_151_098_L2_BAND1.tif'),
                 'expected': 'Size of `201001` reception date is not 8.'
             },
             {
-                'asset_path': '/TIFF/LANDSAT1/1973_05/LANDSAT1_MSS_19730521.1200/237_059_0/'
-                              '2_BC_UTM_WGS84/LANDSAT_1_MSS_19730521_237_059_L2_BAND4.tif',
+                'asset_path': ('/TIFF/LANDSAT1/1973_05/LANDSAT1_MSS_19730521.1200/237_059_0/'
+                              '2_BC_UTM_WGS84/LANDSAT_1_MSS_19730521_237_059_L2_BAND4.tif'),
                 'expected': 'Size of `1200` reception time is not 6.'
             },
             {
-                'asset_path': '/TIFF/SENTINEL/2021_01/SENTINEL_X_MUX_RAW_2021_01_01.13_48_30_ETC2/'
-                        '209_110_0/2_BC_UTM_WGS84/SENTINEL_X_SL_20210101_209_110_L2_BAND5.tif',
-                'expected': 'Invalid scene directory: `SENTINEL_X_MUX_RAW_2021_01_01.13_48_30_ETC2`.'
+                'asset_path': ('/TIFF/SENTINEL/2021_01/SENTINEL_X_MUX_RAW_2021_01_01.13_48_30_ETC2/'
+                        '209_110_0/2_BC_UTM_WGS84/SENTINEL_X_SL_20210101_209_110_L2_BAND5.tif'),
+                'expected': ('Invalid scene directory: '
+                            '`SENTINEL_X_MUX_RAW_2021_01_01.13_48_30_ETC2`.')
             },
             {
-                'asset_path': '/TIFF/CBERS4A/2021_01/CBERS_4A_MUX_RAW_2021_01_01.13_48_30_ETC2/'
-                        '209_110_0_1/2_BC_UTM_WGS84/CBERS_4A_MUX_20210101_209_110_L2_BAND5.tif',
+                'asset_path': ('/TIFF/CBERS4A/2021_01/CBERS_4A_MUX_RAW_2021_01_01.13_48_30_ETC2/'
+                        '209_110_0_1/2_BC_UTM_WGS84/CBERS_4A_MUX_20210101_209_110_L2_BAND5.tif'),
                 'expected': 'Path/row directory cannot be decoded: `209_110_0_1`.'
             },
             {
-                'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_HRC_20100301.130915/151_A_142_1_0/'
-                              '8_BC_UTM_WGS84/CBERS_2B_HRC_20100301_151_A_142_1_L2_BAND1.tif',
+                'asset_path': ('/TIFF/CBERS2B/2010_03/CBERS2B_HRC_20100301.130915/151_A_142_1_0/'
+                              '8_BC_UTM_WGS84/CBERS_2B_HRC_20100301_151_A_142_1_L2_BAND1.tif'),
                 'expected': 'Geo. processing directory cannot be decoded: `8_BC_UTM_WGS84`.'
             },
             {
-                'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/'
-                              'CBERS_4_AWFI_20210201_154_117_L4_BAND13.tif',
+                'asset_path': ('/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/'
+                              'CBERS_4_AWFI_20210201_154_117_L4_BAND13.tif'),
                 'expected': 'Invalid `5` level to path: `/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_'
                         '2021_02_01.13_07_00_CB11/CBERS_4_AWFI_20210201_154_117_L4_BAND13.tif`.'
             },
             {
-                'asset_path': '/TIFF/LANDSAT1/1973_05/LANDSAT1_MSS_19730521.120000/237_059_0/'
-                              '2_BC_UTM_WGS84/LANDSAT_1_MSS_1973521_237_059_L2_BAND4.tif',
+                'asset_path': ('/TIFF/LANDSAT1/1973_05/LANDSAT1_MSS_19730521.120000/237_059_0/'
+                              '2_BC_UTM_WGS84/LANDSAT_1_MSS_1973521_237_059_L2_BAND4.tif'),
                 'expected': 'Invalid date inside asset: `1973521`.'
             }
         ]
