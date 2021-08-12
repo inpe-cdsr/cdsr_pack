@@ -14,7 +14,7 @@ Look at [here](https://pypi.org/project/cdsr-pack/#history) to see the available
 
 ## Usage
 
-```
+```python
 >>> from cdsr_pack import build_collection, build_item, decode_path
 
 >>> image = ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11/'
