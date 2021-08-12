@@ -75,7 +75,8 @@ def decode_scene_dir(scene_dir: str) -> Tuple[str, str, str, str, str]:
 
         # default value to antenna, because these satellites do
         # not have antenna datum on their scene directory
-        antenna = 'CP'
+        # `ND` stands for `não determinado`
+        antenna = 'ND'
 
     else:
         raise CDSRDecoderException(f'Invalid scene directory: `{scene_dir}`.')
