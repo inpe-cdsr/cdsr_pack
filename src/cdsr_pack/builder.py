@@ -25,7 +25,7 @@ def build_collection(metadata: dict) -> str:
     not_str_keys = [k for k in keys if not isinstance(metadata[k], str)]
 
     if not_str_keys:
-        raise CDSRBuilderException("All mandatory values inside metadata dict must be strings, but "
+        raise CDSRBuilderException('All mandatory values inside metadata dict must be strings, but '
                                   f"the following keys are not: `{', '.join(not_str_keys)}`.")
 
     return f"{metadata['satellite']}_{metadata['sensor']}_" \
@@ -40,7 +40,7 @@ def build_item(metadata: dict) -> str:
         raise CDSRBuilderException(f'Metadata must be a dict, not a `{type(metadata)}`.')
 
     # mandatory keys
-    keys = ['satellite', 'sensor', 'path', 'row', 'date']
+    keys = ['satellite', 'sensor', 'path', 'row', 'date', 'antenna']
 
     # get all keys that are missing inside metadata dict
     missing_keys = [k for k in keys if k not in metadata]
@@ -52,8 +52,9 @@ def build_item(metadata: dict) -> str:
     not_str_keys = [k for k in keys if not isinstance(metadata[k], str)]
 
     if not_str_keys:
-        raise CDSRBuilderException("All mandatory values inside metadata dict must be strings, but "
+        raise CDSRBuilderException('All mandatory values inside metadata dict must be strings, but '
                                   f"the following keys are not: `{', '.join(not_str_keys)}`.")
 
     return f"{metadata['satellite']}_{metadata['sensor']}_" \
-           f"{metadata['path']}{metadata['row']}_{metadata['date'].replace('-', '')}"
+           f"{metadata['path']}{metadata['row']}_{metadata['date'].replace('-', '')}_" \
+           f"{metadata['antenna']}"
