@@ -22,7 +22,7 @@ class TestCDSRPackAMAZONIA1(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'AMAZONIA1_WFI_L2_DN',
-                'expected_item': 'AMAZONIA1_WFI_217015_20210303'
+                'expected_item': 'AMAZONIA1_WFI_217015_20210303_CB11'
             },
             {
                 'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11'
@@ -33,7 +33,7 @@ class TestCDSRPackAMAZONIA1(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'AMAZONIA1_WFI_L2_DN',
-                'expected_item': 'AMAZONIA1_WFI_217015_20210303'
+                'expected_item': 'AMAZONIA1_WFI_217015_20210303_CB11'
             },
             {
                 'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11'
@@ -44,7 +44,7 @@ class TestCDSRPackAMAZONIA1(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'AMAZONIA1_WFI_L2_DN',
-                'expected_item': 'AMAZONIA1_WFI_217015_20210303'
+                'expected_item': 'AMAZONIA1_WFI_217015_20210303_CB11'
             },
             {
                 'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11'
@@ -55,7 +55,7 @@ class TestCDSRPackAMAZONIA1(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'AMAZONIA1_WFI_L2_DN',
-                'expected_item': 'AMAZONIA1_WFI_217015_20210303'
+                'expected_item': 'AMAZONIA1_WFI_217015_20210303_CB11'
             },
             {
                 'asset_path': ('/TIFF/AMAZONIA1/2021_04/AMAZONIA_1_WFI_DRD_2021_04_01.13_22_45_CP5_'
@@ -66,7 +66,7 @@ class TestCDSRPackAMAZONIA1(TestCase):
                     'antenna': 'CP5'
                 },
                 'expected_collection': 'AMAZONIA1_WFI_L4_DN',
-                'expected_item': 'AMAZONIA1_WFI_035016_20210401'
+                'expected_item': 'AMAZONIA1_WFI_035016_20210401_CP5'
             }
         ]
 
@@ -154,7 +154,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'CBERS2B_CCD_L2_DN',
-                'expected_item': 'CBERS2B_CCD_151098_20100301'
+                'expected_item': 'CBERS2B_CCD_151098_20100301_CP'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_CCD_20100301.130915/151_098_0/'
@@ -165,7 +165,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'CBERS2B_CCD_L2_DN',
-                'expected_item': 'CBERS2B_CCD_151098_20100301'
+                'expected_item': 'CBERS2B_CCD_151098_20100301_CP'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_HRC_20100301.130915/151_B_141_5_0/'
@@ -176,7 +176,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'CBERS2B_HRC_L2_DN',
-                'expected_item': 'CBERS2B_HRC_151141_20100301'
+                'expected_item': 'CBERS2B_HRC_151141_20100301_CP'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_HRC_20100301.130915/151_B_141_5_0/'
@@ -187,7 +187,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'CBERS2B_HRC_L2_DN',
-                'expected_item': 'CBERS2B_HRC_151141_20100301'
+                'expected_item': 'CBERS2B_HRC_151141_20100301_CP'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_HRC_20100301.130915/151_A_142_1_0/'
@@ -198,7 +198,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'CBERS2B_HRC_L2_DN',
-                'expected_item': 'CBERS2B_HRC_151142_20100301'
+                'expected_item': 'CBERS2B_HRC_151142_20100301_CP'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_HRC_20100301.130915/151_A_142_1_0/'
@@ -209,7 +209,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'CBERS2B_HRC_L2_DN',
-                'expected_item': 'CBERS2B_HRC_151142_20100301'
+                'expected_item': 'CBERS2B_HRC_151142_20100301_CP'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_WFI_20100301.144734/177_092_0/'
@@ -220,7 +220,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'CBERS2B_WFI_L2_DN',
-                'expected_item': 'CBERS2B_WFI_177092_20100301'
+                'expected_item': 'CBERS2B_WFI_177092_20100301_CP'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_WFI_20100301.144734/177_092_0/'
@@ -231,7 +231,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'CBERS2B_WFI_L2_DN',
-                'expected_item': 'CBERS2B_WFI_177092_20100301'
+                'expected_item': 'CBERS2B_WFI_177092_20100301_CP'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_CCD_20100301.130915/151_098_0/'
@@ -242,7 +242,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'CBERS2B_CCD_L2_DN',
-                'expected_item': 'CBERS2B_CCD_151098_20100301'
+                'expected_item': 'CBERS2B_CCD_151098_20100301_CP'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_HRC_20100301.130915/151_B_141_5_0/'
@@ -253,7 +253,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'CBERS2B_HRC_L2_DN',
-                'expected_item': 'CBERS2B_HRC_151141_20100301'
+                'expected_item': 'CBERS2B_HRC_151141_20100301_CP'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_HRC_20100301.130915/151_A_142_1_0/'
@@ -264,7 +264,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'CBERS2B_HRC_L2_DN',
-                'expected_item': 'CBERS2B_HRC_151142_20100301'
+                'expected_item': 'CBERS2B_HRC_151142_20100301_CP'
             },
             {
                 'asset_path': '/TIFF/CBERS2B/2010_03/CBERS2B_WFI_20100301.144734/177_092_0/'
@@ -275,7 +275,7 @@ class TestCDSRPackCBERS2B(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'CBERS2B_WFI_L2_DN',
-                'expected_item': 'CBERS2B_WFI_177092_20100301'
+                'expected_item': 'CBERS2B_WFI_177092_20100301_CP'
             }
 
         ]
@@ -390,7 +390,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'CBERS4_AWFI_L4_DN',
-                'expected_item': 'CBERS4_AWFI_154117_20210201'
+                'expected_item': 'CBERS4_AWFI_154117_20210201_CB11'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/'
@@ -401,7 +401,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'CBERS4_AWFI_L4_DN',
-                'expected_item': 'CBERS4_AWFI_154117_20210201'
+                'expected_item': 'CBERS4_AWFI_154117_20210201_CB11'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/154_'
@@ -412,7 +412,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'CBERS4_AWFI_L4_SR',
-                'expected_item': 'CBERS4_AWFI_154117_20210201'
+                'expected_item': 'CBERS4_AWFI_154117_20210201_CB11'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/154_'
@@ -423,7 +423,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'CBERS4_AWFI_L4_SR',
-                'expected_item': 'CBERS4_AWFI_154117_20210201'
+                'expected_item': 'CBERS4_AWFI_154117_20210201_CB11'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/'
@@ -434,7 +434,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'CBERS4_MUX_L4_SR',
-                'expected_item': 'CBERS4_MUX_155103_20200731'
+                'expected_item': 'CBERS4_MUX_155103_20200731_CB11'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/'
@@ -445,7 +445,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'CBERS4_MUX_L4_SR',
-                'expected_item': 'CBERS4_MUX_155103_20200731'
+                'expected_item': 'CBERS4_MUX_155103_20200731_CB11'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/155_'
@@ -456,7 +456,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'CBERS4_MUX_L4_SR',
-                'expected_item': 'CBERS4_MUX_155103_20200731'
+                'expected_item': 'CBERS4_MUX_155103_20200731_CB11'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2020_07/CBERS_4_MUX_DRD_2020_07_31.13_07_00_CB11/155_'
@@ -467,7 +467,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'CBERS4_MUX_L4_SR',
-                'expected_item': 'CBERS4_MUX_155103_20200731'
+                'expected_item': 'CBERS4_MUX_155103_20200731_CB11'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2018_01/CBERS_4_MUX_DRD_2018_01_01.13_14_00_CB11/'
@@ -478,7 +478,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'CBERS4_MUX_L4_DN',
-                'expected_item': 'CBERS4_MUX_156103_20180101'
+                'expected_item': 'CBERS4_MUX_156103_20180101_CB11'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2018_01/CBERS_4_MUX_DRD_2018_01_01.13_14_00_CB11/'
@@ -489,7 +489,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'CBERS4_MUX_L4_DN',
-                'expected_item': 'CBERS4_MUX_156103_20180101'
+                'expected_item': 'CBERS4_MUX_156103_20180101_CB11'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_PAN10M_DRD_2021_02_02.01_32_45_CB11/'
@@ -500,7 +500,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'CBERS4_PAN10M_L2_DN',
-                'expected_item': 'CBERS4_PAN10M_073113_20210201'
+                'expected_item': 'CBERS4_PAN10M_073113_20210201_CB11'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_PAN10M_DRD_2021_02_02.01_32_45_CB11/'
@@ -511,7 +511,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'CBERS4_PAN10M_L2_DN',
-                'expected_item': 'CBERS4_PAN10M_073113_20210201'
+                'expected_item': 'CBERS4_PAN10M_073113_20210201_CB11'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/'
@@ -522,7 +522,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'CBERS4_AWFI_L4_DN',
-                'expected_item': 'CBERS4_AWFI_154117_20210201'
+                'expected_item': 'CBERS4_AWFI_154117_20210201_CB11'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00_CB11/154_'
@@ -533,7 +533,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'CBERS4_AWFI_L4_SR',
-                'expected_item': 'CBERS4_AWFI_154117_20210201'
+                'expected_item': 'CBERS4_AWFI_154117_20210201_CB11'
             },
             {
                 'asset_path': '/TIFF/CBERS4/2021_02/CBERS_4_PAN10M_DRD_2021_02_02.01_32_45_CB11/'
@@ -544,7 +544,7 @@ class TestCDSRPackCBERS4(TestCase):
                     'antenna': 'CB11'
                 },
                 'expected_collection': 'CBERS4_PAN10M_L2_DN',
-                'expected_item': 'CBERS4_PAN10M_073113_20210201'
+                'expected_item': 'CBERS4_PAN10M_073113_20210201_CB11'
             }
         ]
 
@@ -628,7 +628,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_MUX_L2_DN',
-                'expected_item': 'CBERS4A_MUX_209110_20210101'
+                'expected_item': 'CBERS4A_MUX_209110_20210101_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2021_01/CBERS_4A_MUX_RAW_2021_01_01.13_48_30_ETC2/'
@@ -639,7 +639,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_MUX_L2_DN',
-                'expected_item': 'CBERS4A_MUX_209110_20210101'
+                'expected_item': 'CBERS4A_MUX_209110_20210101_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
@@ -650,7 +650,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_MUX_L3_DN',
-                'expected_item': 'CBERS4A_MUX_209122_20201201'
+                'expected_item': 'CBERS4A_MUX_209122_20201201_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
@@ -661,7 +661,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_MUX_L3_DN',
-                'expected_item': 'CBERS4A_MUX_209122_20201201'
+                'expected_item': 'CBERS4A_MUX_209122_20201201_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
@@ -672,7 +672,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_MUX_L4_DN',
-                'expected_item': 'CBERS4A_MUX_209122_20201201'
+                'expected_item': 'CBERS4A_MUX_209122_20201201_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
@@ -683,7 +683,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_MUX_L4_DN',
-                'expected_item': 'CBERS4A_MUX_209122_20201201'
+                'expected_item': 'CBERS4A_MUX_209122_20201201_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_22.13_53_30_ETC2_'
@@ -694,7 +694,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_WFI_L2B_DN',
-                'expected_item': 'CBERS4A_WFI_211108_20201222'
+                'expected_item': 'CBERS4A_WFI_211108_20201222_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_22.13_53_30_ETC2_'
@@ -705,7 +705,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_WFI_L2B_DN',
-                'expected_item': 'CBERS4A_WFI_211108_20201222'
+                'expected_item': 'CBERS4A_WFI_211108_20201222_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
@@ -716,7 +716,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_WFI_L4_SR',
-                'expected_item': 'CBERS4A_WFI_214108_20201207'
+                'expected_item': 'CBERS4A_WFI_214108_20201207_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
@@ -727,7 +727,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_WFI_L4_SR',
-                'expected_item': 'CBERS4A_WFI_214108_20201207'
+                'expected_item': 'CBERS4A_WFI_214108_20201207_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
@@ -739,7 +739,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_WFI_L4_SR',
-                'expected_item': 'CBERS4A_WFI_214108_20201207'
+                'expected_item': 'CBERS4A_WFI_214108_20201207_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
@@ -751,7 +751,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_WFI_L4_SR',
-                'expected_item': 'CBERS4A_WFI_214108_20201207'
+                'expected_item': 'CBERS4A_WFI_214108_20201207_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
@@ -763,7 +763,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_WFI_L4_SR',
-                'expected_item': 'CBERS4A_WFI_214108_20201207'
+                'expected_item': 'CBERS4A_WFI_214108_20201207_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2019_12/CBERS_4A_WFI_RAW_2019_12_27.13_53_00_ETC2/'
@@ -774,7 +774,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_WFI_L4_DN',
-                'expected_item': 'CBERS4A_WFI_215132_20191227'
+                'expected_item': 'CBERS4A_WFI_215132_20191227_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2019_12/CBERS_4A_WFI_RAW_2019_12_27.13_53_00_ETC2/'
@@ -785,7 +785,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_WFI_L4_DN',
-                'expected_item': 'CBERS4A_WFI_215132_20191227'
+                'expected_item': 'CBERS4A_WFI_215132_20191227_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2020_11/CBERS_4A_WFI_RAW_2020_11_22.14_11_30_ETC2/'
@@ -796,7 +796,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_WFI_L3_DN',
-                'expected_item': 'CBERS4A_WFI_217156_20201122'
+                'expected_item': 'CBERS4A_WFI_217156_20201122_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2020_11/CBERS_4A_WFI_RAW_2020_11_22.14_11_30_ETC2/'
@@ -807,7 +807,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_WFI_L3_DN',
-                'expected_item': 'CBERS4A_WFI_217156_20201122'
+                'expected_item': 'CBERS4A_WFI_217156_20201122_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2021_01/CBERS_4A_MUX_RAW_2021_01_01.13_48_30_ETC2/'
@@ -818,7 +818,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_MUX_L2_DN',
-                'expected_item': 'CBERS4A_MUX_209110_20210101'
+                'expected_item': 'CBERS4A_MUX_209110_20210101_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
@@ -829,7 +829,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_MUX_L3_DN',
-                'expected_item': 'CBERS4A_MUX_209122_20201201'
+                'expected_item': 'CBERS4A_MUX_209122_20201201_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2019_12/CBERS_4A_WFI_RAW_2019_12_27.13_53_00_ETC2/'
@@ -840,7 +840,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_WFI_L4_DN',
-                'expected_item': 'CBERS4A_WFI_215132_20191227'
+                'expected_item': 'CBERS4A_WFI_215132_20191227_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_22.13_53_30_ETC2_'
@@ -851,7 +851,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'ETC2'
                 },
                 'expected_collection': 'CBERS4A_WFI_L2B_DN',
-                'expected_item': 'CBERS4A_WFI_211108_20201222'
+                'expected_item': 'CBERS4A_WFI_211108_20201222_ETC2'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2020_04/CBERS_4A_MUX_RAW_2020_04_23.01_24_22_CP5'
@@ -862,7 +862,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'CP5'
                 },
                 'expected_collection': 'CBERS4A_MUX_L2_DN',
-                'expected_item': 'CBERS4A_MUX_266023_20200422'
+                'expected_item': 'CBERS4A_MUX_266023_20200422_CP5'
             },
             {
                 'asset_path': ('/TIFF/CBERS4A/2020_04/CBERS_4A_MUX_RAW_2020_04_06.00_56_20_CP5'
@@ -873,7 +873,7 @@ class TestCDSRPackCBERS4A(TestCase):
                     'antenna': 'CP5'
                 },
                 'expected_collection': 'CBERS4A_MUX_L2_DN',
-                'expected_item': 'CBERS4A_MUX_164025_20200405'
+                'expected_item': 'CBERS4A_MUX_164025_20200405_CP5'
             }
         ]
 
@@ -966,7 +966,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'LANDSAT1_MSS_L2_DN',
-                'expected_item': 'LANDSAT1_MSS_237059_19730521'
+                'expected_item': 'LANDSAT1_MSS_237059_19730521_CP'
             },
             {
                 'asset_path': '/TIFF/LANDSAT1/1973_05/LANDSAT1_MSS_19730521.120000/237_059_0/'
@@ -977,7 +977,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'LANDSAT1_MSS_L2_DN',
-                'expected_item': 'LANDSAT1_MSS_237059_19730521'
+                'expected_item': 'LANDSAT1_MSS_237059_19730521_CP'
             },
             {
                 'asset_path': '/TIFF/LANDSAT2/1982_02/LANDSAT2_MSS_19820201.120000/005_055_0/'
@@ -988,7 +988,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'LANDSAT2_MSS_L2_DN',
-                'expected_item': 'LANDSAT2_MSS_005055_19820201'
+                'expected_item': 'LANDSAT2_MSS_005055_19820201_CP'
             },
             {
                 'asset_path': '/TIFF/LANDSAT2/1982_02/LANDSAT2_MSS_19820201.120000/005_055_0/'
@@ -999,7 +999,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'LANDSAT2_MSS_L2_DN',
-                'expected_item': 'LANDSAT2_MSS_005055_19820201'
+                'expected_item': 'LANDSAT2_MSS_005055_19820201_CP'
             },
             {
                 'asset_path': '/TIFF/LANDSAT3/1978_04/LANDSAT3_MSS_19780405.120000/235_075_0/'
@@ -1010,7 +1010,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'LANDSAT3_MSS_L2_DN',
-                'expected_item': 'LANDSAT3_MSS_235075_19780405'
+                'expected_item': 'LANDSAT3_MSS_235075_19780405_CP'
             },
             {
                 'asset_path': '/TIFF/LANDSAT3/1978_04/LANDSAT3_MSS_19780405.120000/235_075_0/'
@@ -1021,7 +1021,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'LANDSAT3_MSS_L2_DN',
-                'expected_item': 'LANDSAT3_MSS_235075_19780405'
+                'expected_item': 'LANDSAT3_MSS_235075_19780405_CP'
             },
             {
                 'asset_path': '/TIFF/LANDSAT5/2011_11/LANDSAT5_TM_20111101.140950/233_054_0/'
@@ -1032,7 +1032,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'LANDSAT5_TM_L2_DN',
-                'expected_item': 'LANDSAT5_TM_233054_20111101'
+                'expected_item': 'LANDSAT5_TM_233054_20111101_CP'
             },
             {
                 'asset_path': '/TIFF/LANDSAT5/2011_11/LANDSAT5_TM_20111101.140950/233_054_0/'
@@ -1043,7 +1043,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'LANDSAT5_TM_L2_DN',
-                'expected_item': 'LANDSAT5_TM_233054_20111101'
+                'expected_item': 'LANDSAT5_TM_233054_20111101_CP'
             },
             {
                 'asset_path': '/TIFF/LANDSAT7/1999_07/LANDSAT7_ETM_19990731.144148/004_072_0/'
@@ -1054,7 +1054,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'LANDSAT7_ETM_L2_DN',
-                'expected_item': 'LANDSAT7_ETM_004072_19990731'
+                'expected_item': 'LANDSAT7_ETM_004072_19990731_CP'
             },
             {
                 'asset_path': '/TIFF/LANDSAT7/1999_07/LANDSAT7_ETM_19990731.144148/004_072_0/'
@@ -1065,7 +1065,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'LANDSAT7_ETM_L2_DN',
-                'expected_item': 'LANDSAT7_ETM_004072_19990731'
+                'expected_item': 'LANDSAT7_ETM_004072_19990731_CP'
             },
             {
                 'asset_path': '/TIFF/LANDSAT2/1982_02/LANDSAT2_MSS_19820201.120000/005_055_0/'
@@ -1076,7 +1076,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'LANDSAT2_MSS_L2_DN',
-                'expected_item': 'LANDSAT2_MSS_005055_19820201'
+                'expected_item': 'LANDSAT2_MSS_005055_19820201_CP'
             },
             {
                 'asset_path': '/TIFF/LANDSAT5/2011_11/LANDSAT5_TM_20111101.140950/233_054_0/'
@@ -1087,7 +1087,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'LANDSAT5_TM_L2_DN',
-                'expected_item': 'LANDSAT5_TM_233054_20111101'
+                'expected_item': 'LANDSAT5_TM_233054_20111101_CP'
             },
             {
                 'asset_path': '/TIFF/LANDSAT7/1999_07/LANDSAT7_ETM_19990731.144148/004_072_0/'
@@ -1098,7 +1098,7 @@ class TestCDSRPackLANDSAT(TestCase):
                     'antenna': 'CP'
                 },
                 'expected_collection': 'LANDSAT7_ETM_L2_DN',
-                'expected_item': 'LANDSAT7_ETM_004072_19990731'
+                'expected_item': 'LANDSAT7_ETM_004072_19990731_CP'
             }
         ]
 
@@ -1149,7 +1149,8 @@ class TestCDSRPackOtherBehaviors(TestCase):
             {
                 'metadata': {
                     'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '217', 'row': '015',
-                    'date': None, 'geo_processing': '2', 'radio_processing': 'DN'
+                    'date': None, 'geo_processing': '2', 'radio_processing': 'DN',
+                    'antenna': 'CP'
                 },
                 'expected_collection': 'AMAZONIA1_WFI_L2_DN',
                 'expected_build_item_error': 'All mandatory values inside metadata dict must be '
@@ -1158,7 +1159,8 @@ class TestCDSRPackOtherBehaviors(TestCase):
             {
                 'metadata': {
                     'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '217', 'row': None,
-                    'date': '2021-03-03', 'geo_processing': '2', 'radio_processing': None
+                    'date': '2021-03-03', 'geo_processing': '2', 'radio_processing': None,
+                    'antenna': 'CP'
                 },
                 'expected_build_collection_error': 'All mandatory values inside metadata dict must '
                                 'be strings, but the following keys are not: `radio_processing`.',
@@ -1267,44 +1269,53 @@ class TestCDSRPackErrors(TestCase):
         test_cases = [
             {
                 'metadata': '',
-                'expected_build_collection_error': "Metadata must be a dict, "
-                                                   "not a `<class 'str'>`.",
-                'expected_build_item_error': "Metadata must be a dict, not a "
-                                             "`<class 'str'>`."
+                'expected_build_collection_error': ("Metadata must be a dict, "
+                                                    "not a `<class 'str'>`."),
+                'expected_build_item_error': ("Metadata must be a dict, not a "
+                                              "`<class 'str'>`.")
             },
             {
                 'metadata': 0,
-                'expected_build_collection_error': "Metadata must be a dict, "
-                                                   "not a `<class 'int'>`.",
-                'expected_build_item_error': "Metadata must be a dict, not a "
-                                             "`<class 'int'>`."
+                'expected_build_collection_error': ("Metadata must be a dict, "
+                                                    "not a `<class 'int'>`."),
+                'expected_build_item_error': ("Metadata must be a dict, not a "
+                                              "`<class 'int'>`.")
             },
             {
                 'metadata': [],
-                'expected_build_collection_error': "Metadata must be a dict, "
-                                                   "not a `<class 'list'>`.",
-                'expected_build_item_error': "Metadata must be a dict, not a "
-                                             "`<class 'list'>`."
+                'expected_build_collection_error': ("Metadata must be a dict, "
+                                                    "not a `<class 'list'>`."),
+                'expected_build_item_error': ("Metadata must be a dict, not a "
+                                              "`<class 'list'>`.")
             },
             {
                 'metadata': {'sensor': 'WFI'},
-                'expected_build_collection_error': 'Missing keys inside metadata: '
-                                        '`satellite, geo_processing, radio_processing`.',
-                'expected_build_item_error': 'Missing keys inside metadata: `satellite, '
-                                        'path, row, date`.'
+                'expected_build_collection_error': ('Missing keys inside metadata: '
+                                        '`satellite, geo_processing, radio_processing`.'),
+                'expected_build_item_error': ('Missing keys inside metadata: `satellite, '
+                                              'path, row, date, antenna`.')
             },
             {
                 'metadata': {'radio_processing': 'SR'},
-                'expected_build_collection_error': 'Missing keys inside metadata: '
-                                                   '`satellite, sensor, geo_processing`.',
-                'expected_build_item_error': 'Missing keys inside metadata: `satellite, sensor, '
-                                             'path, row, date`.',
+                'expected_build_collection_error': ('Missing keys inside metadata: '
+                                                    '`satellite, sensor, geo_processing`.'),
+                'expected_build_item_error': ('Missing keys inside metadata: `satellite, sensor, '
+                                             'path, row, date, antenna`.'),
             },
             {
                 'metadata': {'satellite': 'AMAZONIA1', 'sensor': 'WFI'},
-                'expected_build_collection_error': 'Missing keys inside metadata: '
-                                                   '`geo_processing, radio_processing`.',
-                'expected_build_item_error': 'Missing keys inside metadata: `path, row, date`.'
+                'expected_build_collection_error': ('Missing keys inside metadata: '
+                                                    '`geo_processing, radio_processing`.'),
+                'expected_build_item_error': ('Missing keys inside metadata: `path, '
+                                              'row, date, antenna`.')
+            },
+            {
+                'metadata': {'antenna': 'CP11', 'sensor': 'WFI'},
+                'expected_build_collection_error': ('Missing keys inside metadata: '
+                                                    '`satellite, geo_processing, '
+                                                    'radio_processing`.'),
+                'expected_build_item_error': ('Missing keys inside metadata: `satellite, '
+                                              'path, row, date`.')
             }
         ]
 
