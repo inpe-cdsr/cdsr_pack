@@ -25,14 +25,15 @@ Look at [here](https://pypi.org/project/cdsr-pack/#history) to see the available
 >>> decoded_image
 {
     'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '217', 'row': '015',
-    'date': '2021-03-03', 'geo_processing': '2', 'radio_processing': 'DN'
+    'date': '2021-03-03', 'geo_processing': '2', 'radio_processing': 'DN',
+    'antenna': 'CB11'
 }
 
 >>> build_collection(decoded_image)
 'AMAZONIA1_WFI_L2_DN'
 
 >>> build_item(decoded_image)
-'AMAZONIA1_WFI_217015_20210303'
+'AMAZONIA1_WFI_217015_20210303_CB11'
 ```
 
 ## Development
