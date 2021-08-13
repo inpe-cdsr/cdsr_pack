@@ -127,7 +127,8 @@ class TestCDSRPackAMAZONIA1(TestCase):
             {
                 'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40'
                         '/217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif'),
-                'expected_error_message': 'Invalid antenna and server data: `[]`.'
+                'expected_error_message': ('`AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40` scene_dir '
+                                           'does not contain antenna datum.')
             }
         ]
 
@@ -601,7 +602,8 @@ class TestCDSRPackCBERS4(TestCase):
             {
                 'asset_path': ('/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00/'
                         '154_117_0/4_BC_UTM_WGS84/CBERS_4_AWFI_20210201_154_117_L4_BAND13.tif'),
-                'expected_error_message': 'Invalid antenna and server data: `[]`.'
+                'expected_error_message': ('`CBERS_4_AWFI_DRD_2021_02_01.13_07_00` scene_dir '
+                                           'does not contain antenna datum.')
             }
         ]
 
@@ -939,7 +941,8 @@ class TestCDSRPackCBERS4A(TestCase):
             {
                 'asset_path': ('/TIFF/CBERS4A_01/2019_12/CBERS_4A_MUX_RAW_2019_12_28.14_15_00/'
                                '221_108_0/4_BC_UTM_WGS84/CBERS_4A_MUX_20191228_221_108.h5_0.json'),
-                'expected_error_message': 'Invalid antenna and server data: `[]`.'
+                'expected_error_message': ('`CBERS_4A_MUX_RAW_2019_12_28.14_15_00` scene_dir '
+                                           'does not contain antenna datum.')
             }
         ]
 
