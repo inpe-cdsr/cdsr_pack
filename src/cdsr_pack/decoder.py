@@ -45,8 +45,7 @@ def decode_scene_dir(scene_dir: str) -> Tuple[str, str, str, str, str]:
 
         # if there is not at least one element (i.e. antenna), then raise an exception
         if not antenna_and_server:
-            raise CDSRDecoderException('Invalid antenna and server data: '
-                                        f'`{antenna_and_server}`.')
+            raise CDSRDecoderException(f'`{scene_dir}` scene_dir does not contain antenna datum.')
 
         # get antenna datum from the list of parts
         antenna = antenna_and_server[0]
