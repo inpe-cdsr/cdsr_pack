@@ -127,8 +127,26 @@ class TestCDSRPackAMAZONIA1(TestCase):
             {
                 'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40'
                         '/217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif'),
-                'expected_error_message': ('`AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40` scene_dir '
-                                           'does not contain antenna datum.')
+                'expected_error_message': ('Invalid antenna in scene_dir: '
+                                           '`AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40`.')
+            },
+            {
+                'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_XYZ'
+                        '/217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif'),
+                'expected_error_message': ('Invalid antenna in scene_dir: '
+                                           '`AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_XYZ`.')
+            },
+            {
+                'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03.12_57_40_CB11'
+                    '/217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif'),
+                'expected_error_message': ('Invalid reception date in scene_dir: '
+                                           '`AMAZONIA_1_WFI_DRD_2021_03.12_57_40_CB11`.')
+            },
+            {
+                'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_40_CB11'
+                    '/217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif'),
+                'expected_error_message': ('Invalid reception time in scene_dir: '
+                                           '`AMAZONIA_1_WFI_DRD_2021_03_03.12_40_CB11`.')
             }
         ]
 
@@ -602,8 +620,8 @@ class TestCDSRPackCBERS4(TestCase):
             {
                 'asset_path': ('/TIFF/CBERS4/2021_02/CBERS_4_AWFI_DRD_2021_02_01.13_07_00/'
                         '154_117_0/4_BC_UTM_WGS84/CBERS_4_AWFI_20210201_154_117_L4_BAND13.tif'),
-                'expected_error_message': ('`CBERS_4_AWFI_DRD_2021_02_01.13_07_00` scene_dir '
-                                           'does not contain antenna datum.')
+                'expected_error_message': ('Invalid antenna in scene_dir: '
+                                           '`CBERS_4_AWFI_DRD_2021_02_01.13_07_00`.')
             }
         ]
 
@@ -941,8 +959,8 @@ class TestCDSRPackCBERS4A(TestCase):
             {
                 'asset_path': ('/TIFF/CBERS4A_01/2019_12/CBERS_4A_MUX_RAW_2019_12_28.14_15_00/'
                                '221_108_0/4_BC_UTM_WGS84/CBERS_4A_MUX_20191228_221_108.h5_0.json'),
-                'expected_error_message': ('`CBERS_4A_MUX_RAW_2019_12_28.14_15_00` scene_dir '
-                                           'does not contain antenna datum.')
+                'expected_error_message': ('Invalid antenna in scene_dir: '
+                                           '`CBERS_4A_MUX_RAW_2019_12_28.14_15_00`.')
             }
         ]
 
@@ -1219,17 +1237,18 @@ class TestCDSRPackErrors(TestCase):
             {
                 'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57/'
                     '217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif'),
-                'expected': 'Invalid second part of scene dir: `12_57`.'
+                'expected': ('Invalid reception time in scene_dir: '
+                             '`AMAZONIA_1_WFI_DRD_2021_03_03.12_57`.')
             },
             {
                 'asset_path': ('/TIFF/CBERS2B/2010_03/CBERS2B_CCD_201001.130915/151_098_0/'
                               '2_BC_UTM_WGS84/CBERS_2B_CCD2XS_20100301_151_098_L2_BAND1.tif'),
-                'expected': 'Size of `201001` reception date is not 8.'
+                'expected': 'Invalid reception date in scene_dir: `CBERS2B_CCD_201001.130915`.'
             },
             {
                 'asset_path': ('/TIFF/LANDSAT1/1973_05/LANDSAT1_MSS_19730521.1200/237_059_0/'
                               '2_BC_UTM_WGS84/LANDSAT_1_MSS_19730521_237_059_L2_BAND4.tif'),
-                'expected': 'Size of `1200` reception time is not 6.'
+                'expected': 'Invalid reception time in scene_dir: `LANDSAT1_MSS_19730521.1200`.'
             },
             {
                 'asset_path': ('/TIFF/SENTINEL/2021_01/SENTINEL_X_MUX_RAW_2021_01_01.13_48_30_ETC2/'
