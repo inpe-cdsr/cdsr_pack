@@ -55,22 +55,9 @@ $ pyenv activate inpe_cdsr_cdsr_pack && \
 
 ### Testing
 
-Activate the virtualenv:
+Activate the virtualenv and run the test cases:
 
 ```
 $ pyenv activate inpe_cdsr_cdsr_pack
-```
-
-Run the test cases:
-
-```
-$ python -m unittest discover tests "test_*.py" -v
-```
-
-Or, run the test cases and get coverage report:
-
-```
-$ coverage run -m unittest discover tests "test_*.py" -v &&
-    coverage report -m &&
-    coverage html
+$ ./run_tests.sh
 ```
