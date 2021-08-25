@@ -271,8 +271,50 @@ class TestCDSRPackCBERS4A(TestCDSRPack):
 
         self.assert_valid_assets(test_cases)
 
-    # def test__cbers4a__valid_paths(self):
-    #     TODO """Tests valid CBERS4A paths."""
+    def test__cbers4a__valid_paths(self):
+        """Tests valid CBERS4A paths."""
+
+        # `radio_processing` and `date` keys are get from asset, not path
+        test_cases = [
+            {
+                'path': '/TIFF/CBERS4A/2019_12/CBERS_4A_MUX_RAW_2019_12_27.13_53_00_ETC2/'
+                        '215_150_0/4_BC_UTM_WGS84',
+                'expected_metadata': {
+                    'satellite': 'CBERS4A', 'sensor': 'MUX', 'path': '215', 'row': '150',
+                    'date': None, 'geo_processing': '4', 'radio_processing': None,
+                    'antenna': 'ETC2'
+                }
+            },
+            {
+                'path': '/TIFF/CBERS4A/2019_12/CBERS_4A_WFI_RAW_2019_12_27.13_53_00_ETC2/'
+                        '215_132_0/4_BC_UTM_WGS84',
+                'expected_metadata': {
+                    'satellite': 'CBERS4A', 'sensor': 'WFI', 'path': '215', 'row': '132',
+                    'date': None, 'geo_processing': '4', 'radio_processing': None,
+                    'antenna': 'ETC2'
+                }
+            },
+            {
+                'path': '/TIFF/CBERS4A/2020_04/CBERS_4A_WPM_RAW_2020_04_01.13_18_58_ETC2/'
+                        '202_112_0/2_BC_UTM_WGS84',
+                'expected_metadata': {
+                    'satellite': 'CBERS4A', 'sensor': 'WPM', 'path': '202', 'row': '112',
+                    'date': None, 'geo_processing': '2', 'radio_processing': None,
+                    'antenna': 'ETC2'
+                }
+            },
+            {
+                'path': '/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_22.13_53_30_ETC2_CHUNK/'
+                        '211_116_0/4_BC_UTM_WGS84',
+                'expected_metadata': {
+                    'satellite': 'CBERS4A', 'sensor': 'WFI', 'path': '211', 'row': '116',
+                    'date': None, 'geo_processing': '4', 'radio_processing': None,
+                    'antenna': 'ETC2'
+                }
+            }
+        ]
+
+        self.assert_valid_paths(test_cases)
 
     def test__cbers4a__invalid_assets(self):
         """Tests invalid CBERS4A assets."""
