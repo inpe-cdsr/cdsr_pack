@@ -1,13 +1,10 @@
 """Test cases related to AMAZONIA1 satellite."""
 
 
-from unittest import TestCase
-
-from src.cdsr_pack import CDSRBuilderException, CDSRDecoderException, \
-                          build_collection, build_item, decode_path
+from util import TestCDSRPack
 
 
-class TestCDSRPackAMAZONIA1(TestCase):
+class TestCDSRPackAMAZONIA1(TestCDSRPack):
     """TestCDSRPackAMAZONIA1"""
 
     def test__amazonia1__valid_assets(self):
@@ -71,16 +68,7 @@ class TestCDSRPackAMAZONIA1(TestCase):
             }
         ]
 
-        for test_case in test_cases:
-            # check if decode_path function works
-            self.assertEqual(test_case['expected_metadata'],
-                             decode_path(test_case['asset_path']))
-            # check if build_collection function works
-            self.assertEqual(test_case['expected_collection'],
-                             build_collection(test_case['expected_metadata']))
-            # check if build_item function works
-            self.assertEqual(test_case['expected_item'],
-                             build_item(test_case['expected_metadata']))
+        self.assert_valid_assets(test_cases)
 
     def test__amazonia1__valid_paths(self):
         """Tests valid AMAZONIA1 paths."""
@@ -116,63 +104,41 @@ class TestCDSRPackAMAZONIA1(TestCase):
             }
         ]
 
-        # check decode_path function
-        for test_case in test_cases:
-            self.assertEqual(test_case['expected_metadata'], decode_path(test_case['path']))
+        self.assert_valid_paths(test_cases)
 
-            # check build_collection function
-            with self.assertRaises(CDSRBuilderException) as error:
-                build_collection(test_case['expected_metadata'])
-
-            self.assertEqual('All mandatory values inside metadata dict must be strings, '
-                             'but the following keys are not: `radio_processing`.',
-                             str(error.exception))
-
-            # check build_item function
-            with self.assertRaises(CDSRBuilderException) as error:
-                build_item(test_case['expected_metadata'])
-
-            self.assertEqual('All mandatory values inside metadata dict must be strings, '
-                             'but the following keys are not: `date`.',
-                             str(error.exception))
-
-    def test__amazonia1__invalid_assets(self):
-        """Tests invalid AMAZONIA1 assets."""
+    def test__amazonia1__invalid_resources(self):
+        """Tests invalid AMAZONIA1 resources (i.e. either assets or paths)."""
 
         test_cases = [
             {
-                'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11'
+                'path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11'
                         '/217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015'),
                 'expected_error_message': 'An asset must have an extension.'
             },
             {
-                'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40'
+                'path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40'
                         '/217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif'),
                 'expected_error_message': ('Invalid antenna in scene_dir: '
                                            '`AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40`.')
             },
             {
-                'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_XYZ'
+                'path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_XYZ'
                         '/217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif'),
                 'expected_error_message': ('Invalid antenna in scene_dir: '
                                            '`AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_XYZ`.')
             },
             {
-                'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03.12_57_40_CB11'
+                'path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03.12_57_40_CB11'
                     '/217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif'),
                 'expected_error_message': ('Invalid reception date in scene_dir: '
                                            '`AMAZONIA_1_WFI_DRD_2021_03.12_57_40_CB11`.')
             },
             {
-                'asset_path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_40_CB11'
+                'path': ('/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_40_CB11'
                     '/217_015_0/2_BC_LCC_WGS84/AMAZONIA_1_WFI_20210303_217_015_L2_BAND4.tif'),
                 'expected_error_message': ('Invalid reception time in scene_dir: '
                                            '`AMAZONIA_1_WFI_DRD_2021_03_03.12_40_CB11`.')
             }
         ]
 
-        for test_case in test_cases:
-            with self.assertRaises(CDSRDecoderException) as error:
-                decode_path(test_case['asset_path'])
-
-            self.assertEqual(test_case['expected_error_message'], str(error.exception))
+        self.assert_invalid_resources(test_cases)

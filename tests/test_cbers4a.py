@@ -1,13 +1,10 @@
 """Test cases related to CBERS4A satellite."""
 
 
-from unittest import TestCase
-
-from src.cdsr_pack import CDSRDecoderException, \
-                          build_collection, build_item, decode_path
+from util import TestCDSRPack
 
 
-class TestCDSRPackCBERS4A(TestCase):
+class TestCDSRPackCBERS4A(TestCDSRPack):
     """TestCDSRPackCBERS4A"""
 
     def test__cbers4a__valid_assets(self):
@@ -272,16 +269,7 @@ class TestCDSRPackCBERS4A(TestCase):
             }
         ]
 
-        for test_case in test_cases:
-            # check if decode_path function works
-            self.assertEqual(test_case['expected_metadata'],
-                             decode_path(test_case['asset_path']))
-            # check if build_collection function works
-            self.assertEqual(test_case['expected_collection'],
-                             build_collection(test_case['expected_metadata']))
-            # check if build_item function works
-            self.assertEqual(test_case['expected_item'],
-                             build_item(test_case['expected_metadata']))
+        self.assert_valid_assets(test_cases)
 
     # def test__cbers4a__valid_paths(self):
     #     TODO """Tests valid CBERS4A paths."""
@@ -291,56 +279,52 @@ class TestCDSRPackCBERS4A(TestCase):
 
         test_cases = [
             {
-                'asset_path': ('/TIFF/CBERS4A/2021_01/CBERS_4A_MUX_RAW_2021_01_01.13_48_30_ETC2/'
+                'path': ('/TIFF/CBERS4A/2021_01/CBERS_4A_MUX_RAW_2021_01_01.13_48_30_ETC2/'
                                '209_110_0/2_BC_UTM_WGS84/CBERS_4A_MUX_20210101_209_110png'),
                 'expected_error_message': 'An asset must have an extension.'
             },
             {
-                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
+                'path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
                                '209_122_0/3_BC_UTM_WGS84/CBERS_4A_MUX_20201201_209_122_png'),
                 'expected_error_message': 'An asset must have an extension.'
             },
             {
-                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
+                'path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_MUX_RAW_2020_12_01.13_47_30_ETC2/'
                                '209_122_0/4_BC_UTM_WGS84/CBERS_4A_MUX_20201201_209_122'),
                 'expected_error_message': 'An asset must have an extension.'
             },
             {
-                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_22.13_53_30_ETC2_'
+                'path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_22.13_53_30_ETC2_'
                                'CHUNK/211_108_0/2B_BC_UTM_WGS84/CBERS_4A_WFI_20201222_211_108,png'),
                 'expected_error_message': 'An asset must have an extension.'
             },
             {
-                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
+                'path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
                                '214_108_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20201207_214_108png'),
                 'expected_error_message': 'An asset must have an extension.'
             },
             {
-                'asset_path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
+                'path': ('/TIFF/CBERS4A/2020_12/CBERS_4A_WFI_RAW_2020_12_07.14_03_00_ETC2/'
                                '214_108_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20201207_214_108_L4_LEFT_'
                                'CMASK_GRID_SURFACE_json'),
                 'expected_error_message': 'An asset must have an extension.'
             },
             {
-                'asset_path': ('/TIFF/CBERS4A/2019_12/CBERS_4A_WFI_RAW_2019_12_27.13_53_00_ETC2/'
+                'path': ('/TIFF/CBERS4A/2019_12/CBERS_4A_WFI_RAW_2019_12_27.13_53_00_ETC2/'
                                '215_132_0/4_BC_UTM_WGS84/CBERS_4A_WFI_20191227_215_132'),
                 'expected_error_message': 'An asset must have an extension.'
             },
             {
-                'asset_path': ('/TIFF/CBERS4A/2020_11/CBERS_4A_WFI_RAW_2020_11_22.14_11_30_ETC2/'
+                'path': ('/TIFF/CBERS4A/2020_11/CBERS_4A_WFI_RAW_2020_11_22.14_11_30_ETC2/'
                                '217_156_0/3_BC_UTM_WGS84/CBERS_4A_WFI_20201122_217_156,png'),
                 'expected_error_message': 'An asset must have an extension.'
             },
             {
-                'asset_path': ('/TIFF/CBERS4A_01/2019_12/CBERS_4A_MUX_RAW_2019_12_28.14_15_00/'
+                'path': ('/TIFF/CBERS4A_01/2019_12/CBERS_4A_MUX_RAW_2019_12_28.14_15_00/'
                                '221_108_0/4_BC_UTM_WGS84/CBERS_4A_MUX_20191228_221_108.h5_0.json'),
                 'expected_error_message': ('Invalid antenna in scene_dir: '
                                            '`CBERS_4A_MUX_RAW_2019_12_28.14_15_00`.')
             }
         ]
 
-        for test_case in test_cases:
-            with self.assertRaises(CDSRDecoderException) as error:
-                decode_path(test_case['asset_path'])
-
-            self.assertEqual(test_case['expected_error_message'], str(error.exception))
+        self.assert_invalid_resources(test_cases)

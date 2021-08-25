@@ -1,14 +1,10 @@
 """Test cases related to LANDSAT satellites."""
 
 
-from unittest import TestCase
-
-from src.cdsr_pack import CDSRDecoderException, \
-                          build_collection, build_item, decode_path
+from util import TestCDSRPack
 
 
-
-class TestCDSRPackLANDSAT(TestCase):
+class TestCDSRPackLANDSAT(TestCDSRPack):
     """TestCDSRPackDecodeLANDSAT"""
 
     def test__landsat__valid_assets(self):
@@ -160,16 +156,7 @@ class TestCDSRPackLANDSAT(TestCase):
             }
         ]
 
-        for test_case in test_cases:
-            # check if decode_path function works
-            self.assertEqual(test_case['expected_metadata'],
-                             decode_path(test_case['asset_path']))
-            # check if build_collection function works
-            self.assertEqual(test_case['expected_collection'],
-                             build_collection(test_case['expected_metadata']))
-            # check if build_item function works
-            self.assertEqual(test_case['expected_item'],
-                             build_item(test_case['expected_metadata']))
+        self.assert_valid_assets(test_cases)
 
     # def test__landsat__valid_paths(self):
     #     TODO """Tests valid LANDSAT paths."""
@@ -178,20 +165,31 @@ class TestCDSRPackLANDSAT(TestCase):
         """Tests invalid LANDSAT assets."""
 
         test_cases = [
-            '/TIFF/LANDSAT1/1973_05/LANDSAT1_MSS_19730521.120000/237_059_0/'
-                '2_BC_UTM_WGS84/LANDSAT_1_MSS_19730521_237_059png',
-            '/TIFF/LANDSAT2/1982_02/LANDSAT2_MSS_19820201.120000/005_055_0/'
-                '2_BC_UTM_WGS84/LANDSAT_2_MSS_19820201_005_055_png',
-            '/TIFF/LANDSAT3/1978_04/LANDSAT3_MSS_19780405.120000/235_075_0/'
-                '2_BC_UTM_WGS84/LANDSAT_3_MSS_19780405_235_075',
-            '/TIFF/LANDSAT5/2011_11/LANDSAT5_TM_20111101.140950/233_054_0/'
-                '2_BC_UTM_WGS84/LANDSAT_5_TM_20111101_233_054,png',
-            '/TIFF/LANDSAT7/1999_07/LANDSAT7_ETM_19990731.144148/004_072_0/'
-                '2_BC_UTM_WGS84/LANDSAT_7_ETMXS_19990731_004_072png'
+            {
+                'path': ('/TIFF/LANDSAT1/1973_05/LANDSAT1_MSS_19730521.120000/237_059_0/'
+                         '2_BC_UTM_WGS84/LANDSAT_1_MSS_19730521_237_059png'),
+                'expected_error_message': 'An asset must have an extension.'
+            },
+            {
+                'path': ('/TIFF/LANDSAT2/1982_02/LANDSAT2_MSS_19820201.120000/005_055_0/'
+                         '2_BC_UTM_WGS84/LANDSAT_2_MSS_19820201_005_055_png'),
+                'expected_error_message': 'An asset must have an extension.'
+            },
+            {
+                'path': ('/TIFF/LANDSAT3/1978_04/LANDSAT3_MSS_19780405.120000/235_075_0/'
+                         '2_BC_UTM_WGS84/LANDSAT_3_MSS_19780405_235_075'),
+                'expected_error_message': 'An asset must have an extension.'
+            },
+            {
+                'path': ('/TIFF/LANDSAT5/2011_11/LANDSAT5_TM_20111101.140950/233_054_0/'
+                         '2_BC_UTM_WGS84/LANDSAT_5_TM_20111101_233_054,png'),
+                'expected_error_message': 'An asset must have an extension.'
+            },
+            {
+                'path': ('/TIFF/LANDSAT7/1999_07/LANDSAT7_ETM_19990731.144148/004_072_0/'
+                         '2_BC_UTM_WGS84/LANDSAT_7_ETMXS_19990731_004_072png'),
+                'expected_error_message': 'An asset must have an extension.'
+            }
         ]
 
-        for test_case in test_cases:
-            with self.assertRaises(CDSRDecoderException) as error:
-                decode_path(test_case)
-
-            self.assertEqual('An asset must have an extension.', str(error.exception))
+        self.assert_invalid_resources(test_cases)
