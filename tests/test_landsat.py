@@ -158,8 +158,59 @@ class TestCDSRPackLANDSAT(TestCDSRPack):
 
         self.assert_valid_assets(test_cases)
 
-    # def test__landsat__valid_paths(self):
-    #     TODO """Tests valid LANDSAT paths."""
+    def test__landsat__valid_paths(self):
+        """Tests valid LANDSAT paths."""
+
+        # `radio_processing` and `date` keys are get from asset, not path
+        test_cases = [
+            {
+                'path': '/TIFF/LANDSAT1/1973_05/LANDSAT1_MSS_19730521.120000/'
+                        '237_059_0/2_BC_UTM_WGS84',
+                'expected_metadata': {
+                    'satellite': 'LANDSAT1', 'sensor': 'MSS', 'path': '237', 'row': '059',
+                    'date': None, 'geo_processing': '2', 'radio_processing': None,
+                    'antenna': 'ND'
+                }
+            },
+            {
+                'path': '/TIFF/LANDSAT2/1982_02/LANDSAT2_MSS_19820201.120000/'
+                        '005_055_0/2_BC_UTM_WGS84',
+                'expected_metadata': {
+                    'satellite': 'LANDSAT2', 'sensor': 'MSS', 'path': '005', 'row': '055',
+                    'date': None, 'geo_processing': '2', 'radio_processing': None,
+                    'antenna': 'ND'
+                }
+            },
+            {
+                'path': '/TIFF/LANDSAT3/1982_08/LANDSAT3_MSS_19820802.120000/'
+                        '231_072_0/2_BC_UTM_WGS84',
+                'expected_metadata': {
+                    'satellite': 'LANDSAT3', 'sensor': 'MSS', 'path': '231', 'row': '072',
+                    'date': None, 'geo_processing': '2', 'radio_processing': None,
+                    'antenna': 'ND'
+                }
+            },
+            {
+                'path': '/TIFF/LANDSAT5/2011_11/LANDSAT5_TM_20111101.140950/'
+                        '233_054_0/2_BC_UTM_WGS84',
+                'expected_metadata': {
+                    'satellite': 'LANDSAT5', 'sensor': 'TM', 'path': '233', 'row': '054',
+                    'date': None, 'geo_processing': '2', 'radio_processing': None,
+                    'antenna': 'ND'
+                }
+            },
+            {
+                'path': '/TIFF/LANDSAT7/2003_06/LANDSAT7_ETM_20030601.125322/'
+                        '220_061_0/2_BC_UTM_WGS84',
+                'expected_metadata': {
+                    'satellite': 'LANDSAT7', 'sensor': 'ETM', 'path': '220', 'row': '061',
+                    'date': None, 'geo_processing': '2', 'radio_processing': None,
+                    'antenna': 'ND'
+                }
+            }
+        ]
+
+        self.assert_valid_paths(test_cases)
 
     def test__landsat__invalid_assets(self):
         """Tests invalid LANDSAT assets."""
