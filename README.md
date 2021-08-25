@@ -1,5 +1,10 @@
 # cdsr_pack
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/inpe-cdsr/cdsr_pack/blob/master/LICENSE)
+![Github Actions](https://github.com/inpe-cdsr/cdsr_pack/actions/workflows/python-package.yml/badge.svg)
+[![Software Life Cycle](https://img.shields.io/badge/lifecycle-stable-sucess.svg)](https://www.tidyverse.org/lifecycle/#stable)
+
+
 CDSR pack is a package to store common functions from CDSR project.
 
 
