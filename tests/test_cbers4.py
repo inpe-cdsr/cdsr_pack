@@ -180,8 +180,41 @@ class TestCDSRPackCBERS4(TestCDSRPack):
 
         self.assert_valid_assets(test_cases)
 
-    # def test__cbers4__valid_paths(self):
-    #     TODO: """Tests valid CBERS4 paths."""
+    def test__cbers4__valid_paths(self):
+        """Tests valid CBERS4 paths."""
+
+        # `radio_processing` and `date` keys are get from asset, not path
+        test_cases = [
+            {
+                'path': '/TIFF/CBERS4/2016_01/CBERS_4_MUX_DRD_2016_01_01.13_28_32_CB11'
+                        '/157_101_0/2_BC_UTM_WGS84',
+                'expected_metadata': {
+                    'satellite': 'CBERS4', 'sensor': 'MUX', 'path': '157', 'row': '101',
+                    'date': None, 'geo_processing': '2', 'radio_processing': None,
+                    'antenna': 'CB11'
+                }
+            },
+            {
+                'path': '/TIFF/CBERS4/2020_12/CBERS_4_AWFI_DRD_2020_12_28.13_17_30_CB11/'
+                        '157_135_0/4_BC_UTM_WGS84',
+                'expected_metadata': {
+                    'satellite': 'CBERS4', 'sensor': 'AWFI', 'path': '157', 'row': '135',
+                    'date': None, 'geo_processing': '4', 'radio_processing': None,
+                    'antenna': 'CB11'
+                }
+            },
+            {
+                'path': '/TIFF/CBERS4/2021_02/CBERS_4_PAN10M_DRD_2021_02_02.01_32_45_CB11/'
+                        '073_113_0/2_BC_UTM_WGS84',
+                'expected_metadata': {
+                    'satellite': 'CBERS4', 'sensor': 'PAN10M', 'path': '073', 'row': '113',
+                    'date': None, 'geo_processing': '2', 'radio_processing': None,
+                    'antenna': 'CB11'
+                }
+            }
+        ]
+
+        self.assert_valid_paths(test_cases)
 
     def test__cbers4__invalid_assets(self):
         """Tests invalid CBERS4 assets."""
