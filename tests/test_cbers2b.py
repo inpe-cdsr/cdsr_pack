@@ -163,6 +163,7 @@ class TestCDSRPackCBERS2B(TestCase):
     def test__cbers2b__valid_paths(self):
         """Tests valid CBERS2B paths."""
 
+        # `radio_processing` and `date` keys are get from asset, not path
         test_cases = [
             {
                 'path': '/TIFF/CBERS2B/2010_03/CBERS2B_CCD_20100301.130915/151_098_0/'

@@ -85,36 +85,56 @@ class TestCDSRPackAMAZONIA1(TestCase):
     def test__amazonia1__valid_paths(self):
         """Tests valid AMAZONIA1 paths."""
 
+        # `radio_processing` and `date` keys are get from asset, not path
         test_cases = [
-            '/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.12_57_40_CB11/'
-                '217_015_0/2_BC_LCC_WGS84'
+            {
+                'path': '/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.'
+                        '12_57_40_CB11/217_015_0/2_BC_LCC_WGS84',
+                'expected_metadata': {
+                    'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '217', 'row': '015',
+                    'date': None, 'geo_processing': '2', 'radio_processing': None,
+                    'antenna': 'CB11'
+                }
+            },
+            {
+                'path': '/TIFF/AMAZONIA1/2021_03/AMAZONIA_1_WFI_DRD_2021_03_03.'
+                        '14_35_23_CB11_SIR18/233_017_0/4_BC_LCC_WGS84',
+                'expected_metadata': {
+                    'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '233', 'row': '017',
+                    'date': None, 'geo_processing': '4', 'radio_processing': None,
+                    'antenna': 'CB11'
+                }
+            },
+            {
+                'path': '/TIFF/AMAZONIA1/2021_04/AMAZONIA_1_WFI_DRD_2021_04_01.'
+                        '13_22_45_CP5_COROT/035_016_0/4_BC_LCC_WGS84',
+                'expected_metadata': {
+                    'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '035', 'row': '016',
+                    'date': None, 'geo_processing': '4', 'radio_processing': None,
+                    'antenna': 'CP5'
+                }
+            }
         ]
-
-        expected_metadata = {
-            'satellite': 'AMAZONIA1', 'sensor': 'WFI', 'path': '217', 'row': '015',
-            'date': None, 'geo_processing': '2', 'radio_processing': None,
-            'antenna': 'CB11'
-        }
 
         # check decode_path function
         for test_case in test_cases:
-            self.assertEqual(expected_metadata, decode_path(test_case))
+            self.assertEqual(test_case['expected_metadata'], decode_path(test_case['path']))
 
-        # check build_collection function
-        with self.assertRaises(CDSRBuilderException) as error:
-            build_collection(expected_metadata)
+            # check build_collection function
+            with self.assertRaises(CDSRBuilderException) as error:
+                build_collection(test_case['expected_metadata'])
 
-        self.assertEqual('All mandatory values inside metadata dict must be strings, '
-                         'but the following keys are not: `radio_processing`.',
-                         str(error.exception))
+            self.assertEqual('All mandatory values inside metadata dict must be strings, '
+                             'but the following keys are not: `radio_processing`.',
+                             str(error.exception))
 
-        # check build_item function
-        with self.assertRaises(CDSRBuilderException) as error:
-            build_item(expected_metadata)
+            # check build_item function
+            with self.assertRaises(CDSRBuilderException) as error:
+                build_item(test_case['expected_metadata'])
 
-        self.assertEqual('All mandatory values inside metadata dict must be strings, '
-                         'but the following keys are not: `date`.',
-                         str(error.exception))
+            self.assertEqual('All mandatory values inside metadata dict must be strings, '
+                             'but the following keys are not: `date`.',
+                             str(error.exception))
 
     def test__amazonia1__invalid_assets(self):
         """Tests invalid AMAZONIA1 assets."""
